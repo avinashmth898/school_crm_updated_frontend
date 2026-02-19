@@ -1,0 +1,74 @@
+.profile-card.wide {
+  max-width: 900px;
+  padding: 30px;
+}
+
+/* Input Row */
+.fee-input-row {
+  display: grid;
+  grid-template-columns: 1fr 160px 100px;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fee-input-row input,
+.fee-input-row select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #1c2331;
+  border: 1px solid #394b63;
+  color: white;
+  font-size: 14px;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+/* Button */
+.fee-input-row button {
+  height: 36px;
+  padding: 0 14px;
+  background: #00c853;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  justify-self: end;
+}
+
+/* Table */
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fee-table th {
+  text-align: left;
+  padding: 10px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.fee-table td {
+  padding: 10px;
+  border-bottom: 1px solid #394b63;
+  font-size: 14px;
+  color: white;
+}
+
+.fee-table th:last-child,
+.fee-table td:last-child {
+  width: 70px;
+  text-align: center;
+}
+
+.fee-table td button {
+  padding: 4px 10px;
+  font-size: 12px;
+  background: #38bdf8;
+  border: none;
+  color: white;
+  border-radius: 6px;
+}
