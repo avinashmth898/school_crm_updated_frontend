@@ -5,7 +5,20 @@ import CheckFee from "./CheckFee";
 import Defaulters from "./Defaulters";
 
 export default function FeesDashboard() {
-  const [active, setActive] = useState(null);
+  const [activeTab, setActiveTab] = useState("pay");
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "pay":
+        return <PayFee />;
+      case "check":
+        return <CheckFee />;
+      case "defaulters":
+        return <Defaulters />;
+      default:
+        return <PayFee />;
+    }
+  };
 
   return (
     <div className="student-bg">
@@ -14,18 +27,33 @@ export default function FeesDashboard() {
         <h1 className="fees-title">Fee Management</h1>
         <p className="fees-sub">Cash & UPI Collection</p>
 
-        {/* Action Buttons */}
+        {/* Tabs */}
         <div className="fees-actions">
-          <button onClick={() => setActive("pay")}>💰 Pay Fee</button>
-          <button onClick={() => setActive("check")}>📄 Check Fee</button>
-          <button onClick={() => setActive("defaulters")}>⚠️ Defaulters</button>
+          <button
+            className={activeTab === "pay" ? "active-tab" : ""}
+            onClick={() => setActiveTab("pay")}
+          >
+            💰 Pay Fee
+          </button>
+
+          <button
+            className={activeTab === "check" ? "active-tab" : ""}
+            onClick={() => setActiveTab("check")}
+          >
+            📄 Check Fee
+          </button>
+
+          <button
+            className={activeTab === "defaulters" ? "active-tab" : ""}
+            onClick={() => setActiveTab("defaulters")}
+          >
+            ⚠️ Defaulters
+          </button>
         </div>
 
-        {/* Sections */}
-        <div className="fees-content">
-          {active === "pay" && <PayFee />}
-          {active === "check" && <CheckFee />}
-          {active === "defaulters" && <Defaulters />}
+        {/* Dynamic Content Area */}
+        <div className="fees-content fee-card">
+          {renderContent()}
         </div>
 
       </div>

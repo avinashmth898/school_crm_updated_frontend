@@ -20,6 +20,8 @@ import FeeChargeManagement from "../pages/command/FeeChargeManagement";
 import AnnualFeePage from "../pages/command/AnnualFeePage";
 import TransportFeePage from "../pages/command/TransportFeePage";
 import TuitionFeePage from "../pages/command/TuitionFeePage";
+import FeeHistory from "../pages/fees/FeeHistory";
+import FeePaymentCheckoutPage from "../pages/fees/FeePaymentCheckoutPage";
 
 const Router = () => {
   return (
@@ -50,6 +52,9 @@ const Router = () => {
 
         {/* Student Dashboard */}
         <Route path="students/:regNo/dashboard" element={<StudentDashboard />} />
+        <Route path="students/:regNo/fee-history" element={<FeeHistory />} />
+{/*         <Route path="students/:regNo/pay-fee" element={<PayFee />} /> */}
+        <Route path="students/:regNo/pay-fee" element={<FeePaymentCheckoutPage />} />
 
         {/* Students */}
         <Route path="students" element={<StudentSearchPage />} />

@@ -1,95 +1,95 @@
 import "./TransportFeePage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  getTransportFees,
+  createTransportFee,
+  deleteTransportFee
+} from "../../services/transportService";
 
 export default function TransportFeePage() {
+  const [routeName, setRouteName] = useState("");
+  const [amount, setAmount] = useState("");
   const [routes, setRoutes] = useState([]);
-  const [form, setForm] = useState({ route: "", amount: "" });
-  const [editIndex, setEditIndex] = useState(null);
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  // 🔄 Load from backend
+  useEffect(() => {
+    loadRoutes();
+  }, []);
 
-  const addRoute = () => {
-    if (!form.route || !form.amount) return;
-
-    setRoutes([...routes, { ...form }]);
-    setForm({ route: "", amount: "" });
+  const loadRoutes = async () => {
+    const res = await getTransportFees();
+    setRoutes(res.data);
   };
 
-  const updateRoute = (index) => {
-    const updated = [...routes];
-    updated[index] = { ...form };
-    setRoutes(updated);
-    setEditIndex(null);
-    setForm({ route: "", amount: "" });
+  // ➕ Add route
+  const handleAdd = async () => {
+    if (!routeName || !amount) return;
+
+    await createTransportFee({
+      routeName,
+      amount
+    });
+
+    setRouteName("");
+    setAmount("");
+    loadRoutes(); // refresh
   };
 
-  const startEdit = (index) => {
-    setEditIndex(index);
-    setForm(routes[index]);
+  // ❌ Delete route
+  const handleDelete = async (id) => {
+    await deleteTransportFee(id);
+    loadRoutes();
   };
 
   return (
     <div className="student-bg">
       <div className="profile-card wide">
+
         <h2>Transport Fee Setup</h2>
 
-        {/* INPUT ROW */}
-        <div className="fee-input-row">
+        {/* Form */}
+        <div className="fee-form">
           <input
-            name="route"
-            value={form.route}
-            onChange={handleChange}
             placeholder="Route Name"
+            value={routeName}
+            onChange={e => setRouteName(e.target.value)}
           />
-
           <input
-            name="amount"
-            value={form.amount}
-            onChange={handleChange}
-            placeholder="Amount"
             type="number"
+            placeholder="Amount"
+            value={amount}
+            onChange={e => setAmount(e.target.value)}
           />
-
-          {editIndex === null ? (
-            <button onClick={addRoute}>+ Add</button>
-          ) : (
-            <button onClick={() => updateRoute(editIndex)}>Save</button>
-          )}
+          <button className="add-btn" onClick={handleAdd}>+ Add</button>
         </div>
 
-        {/* ROUTE TABLE */}
+        {/* Table */}
         <table className="fee-table">
           <thead>
             <tr>
               <th>Route</th>
               <th>Amount</th>
-              <th>Edit</th>
+              <th>Remove</th>
             </tr>
           </thead>
-
           <tbody>
-            {routes.length === 0 && (
-              <tr>
-                <td colSpan="3" className="empty-row">
-                  No routes configured yet
-                </td>
-              </tr>
-            )}
-
-            {routes.map((r, i) => (
-              <tr key={i}>
-                <td>{r.route}</td>
-                <td>₹ {r.amount}</td>
+            {routes.map(route => (
+              <tr key={route.transportFeeId}>
+                <td>{route.routeName}</td>
+                <td>₹ {route.amount}</td>
                 <td>
-                  <button className="edit-btn" onClick={() => startEdit(i)}>
-                    Edit
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleDelete(route.transportFeeId)}
+                  >
+                    ✖
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+
       </div>
     </div>
   );

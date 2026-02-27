@@ -37,11 +37,12 @@ export default function StudentProfile() {
               <h4>👨‍👩‍👧 Parents</h4>
               <p>Father: {student.fatherName}</p>
               <p>Mother: {student.motherName}</p>
-              <p>Mobile: {student.mobileNumber}</p>
+
             </div>
 
             <div className="info-card">
               <h4>📍 Address</h4>
+              <p>Mobile: {student.mobileNumber}</p>
               <p>{student.address}</p>
               <p><b>Pin:</b> {student.pinCode}</p>
             </div>
@@ -69,6 +70,7 @@ export default function StudentProfile() {
               🧾 View Admission Confirmation
             </button>
 
+
             <button
               className="primary-btn"
               onClick={() =>
@@ -80,6 +82,36 @@ export default function StudentProfile() {
           </div>
         </div>
       )}
+
+
+  <div className="actions">
+    <button
+      className="primary-btn wide"
+      onClick={() => navigate(`/students/${regNo}?print=1`)}
+    >
+      🧾 View Admission Confirmation
+    </button>
+
+    <button
+      className="primary-btn"
+      onClick={() =>
+        navigate(`/students/${student.registrationNumber}/dashboard`)
+      }
+    >
+      📘 Open Extended Dashboard
+    </button>
+
+    {/* ✅ NEW: Fee History Button */}
+    <button
+      className="primary-btn"
+      onClick={() =>
+        navigate(`/students/${student.registrationNumber}/fee-history`)
+      }
+    >
+      💰 Fee History
+    </button>
+  </div>
+
 
       {/* ================= PRINT VIEW ================= */}
       {isPrint && (

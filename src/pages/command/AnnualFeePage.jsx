@@ -1,45 +1,78 @@
 import "./AnnualFeePage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import apiClient from "../../services/apiClient";
 
 export default function AnnualFeePage() {
   const [feeName, setFeeName] = useState("");
   const [amount, setAmount] = useState("");
   const [fees, setFees] = useState([]);
 
-  const addFee = () => {
-    if (!feeName || !amount) return;
-    setFees([...fees, { feeName, amount }]);
-    setFeeName("");
-    setAmount("");
+  // 🔹 Load from backend
+  useEffect(() => {
+    loadFees();
+  }, []);
+
+  const loadFees = async () => {
+    try {
+      const res = await apiClient.get("/config/annual");
+      setFees(res.data);
+    } catch (err) {
+      console.error("Load failed:", err);
+    }
   };
 
-  const removeFee = (index) => {
-    setFees(fees.filter((_, i) => i !== index));
+  // 🔹 Add fee
+  const handleAdd = async () => {
+    if (!feeName || !amount) return;
+
+    try {
+      const res = await apiClient.post("/config/annual", {
+        feeName,
+        amount: Number(amount),
+      });
+
+      // Update UI instantly
+      setFees(prev => [...prev, res.data]);
+
+      setFeeName("");
+      setAmount("");
+    } catch (err) {
+      console.error("Save failed:", err);
+    }
+  };
+
+  // 🔹 Delete fee
+  const handleDelete = async (id) => {
+    try {
+      await apiClient.delete(`/config/annual/${id}`);
+      setFees(prev => prev.filter(f => f.annualFeeId !== id));
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
   };
 
   return (
     <div className="student-bg">
       <div className="profile-card wide">
-
         <h2>Annual Fee Setup</h2>
 
-        <div className="fee-input-row">
+        {/* Form */}
+        <div className="fee-form">
           <input
             placeholder="Fee Name"
             value={feeName}
-            onChange={(e) => setFeeName(e.target.value)}
+            onChange={e => setFeeName(e.target.value)}
           />
-
           <input
+            type="number"
             placeholder="Amount"
             value={amount}
-            type="number"
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={e => setAmount(e.target.value)}
           />
-
-          <button onClick={addFee}>+ Add</button>
+          <button className="add-btn" onClick={handleAdd}>+ Add</button>
         </div>
 
+        {/* Table */}
         <table className="fee-table">
           <thead>
             <tr>
@@ -50,18 +83,23 @@ export default function AnnualFeePage() {
           </thead>
 
           <tbody>
-            {fees.map((fee, i) => (
-              <tr key={i}>
+            {fees.map(fee => (
+              <tr key={fee.annualFeeId}>
                 <td>{fee.feeName}</td>
                 <td>₹ {fee.amount}</td>
                 <td>
-                  <button onClick={() => removeFee(i)}>❌</button>
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleDelete(fee.annualFeeId)}
+                  >
+                    ✖
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
 
+        </table>
       </div>
     </div>
   );

@@ -1,124 +1,118 @@
-import { useState } from "react";
 import "./fees.css";
+import { useEffect, useState } from "react";
+import apiClient from "../../services/apiClient";
 
 export default function PayFee() {
-  const [paymentMode, setPaymentMode] = useState("CASH");
-  const [amount, setAmount] = useState("");
-  const [utr, setUtr] = useState("");
-  const [showReceipt, setShowReceipt] = useState(false);
+  const [students, setStudents] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
-  const isUPI = paymentMode === "UPI";
-  const isValid = amount && (!isUPI || utr.length > 4);
+  const [regSearch, setRegSearch] = useState("");
+  const [nameSearch, setNameSearch] = useState("");
+  const [classFilter, setClassFilter] = useState("");
 
-  const receiptNo = "RCPT-" + Math.floor(Math.random() * 100000);
+  // 🔹 Fetch students (limit 5)
+  useEffect(() => {
+    apiClient.get("/students")
+      .then(res => {
+        setStudents(res.data);
+        setFiltered(res.data.slice(0, 5));
+      })
+      .catch(console.error);
+  }, []);
+
+  // 🔹 Filter logic
+  useEffect(() => {
+    let result = students;
+
+    if (regSearch) {
+      result = result.filter(s =>
+        s.registrationNumber.toString().includes(regSearch)
+      );
+    }
+
+    if (nameSearch) {
+      result = result.filter(s =>
+        s.name.toLowerCase().includes(nameSearch.toLowerCase())
+      );
+    }
+
+    if (classFilter) {
+      result = result.filter(s => s.currentClass === classFilter);
+    }
+
+    setFiltered(result.slice(0, 5));
+  }, [regSearch, nameSearch, classFilter, students]);
+
+  const handleSelect = (student) => {
+    setSelectedStudent(student);
+  };
 
   return (
-    <div className="fee-page">
+    <div className="student-bg">
+      <div className="profile-card wide">
+        <h2>Pay Fee</h2>
 
-      {/* PAY FORM */}
-      {!showReceipt && (
-        <div className="fee-card">
-          <h2>💰 Pay Fee</h2>
-
-          <label>Student</label>
-          <select>
-            <option>Avinash Kumar (UKG)</option>
-            <option>Abhijeet Kumar (UKG)</option>
-            <option>Ravi Kumar (UKG)</option>
-          </select>
-
-          <label>Amount (₹)</label>
+        {/* 🔍 Search Bar */}
+        <div className="filter-row">
           <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Enter amount"
+            placeholder="Search by Registration Number"
+            value={regSearch}
+            onChange={(e) => setRegSearch(e.target.value)}
           />
-
-          <label>Payment Mode</label>
-          <div className="payment-toggle">
-            <button
-              className={paymentMode === "CASH" ? "active" : ""}
-              onClick={() => setPaymentMode("CASH")}
-            >
-              Cash
-            </button>
-            <button
-              className={paymentMode === "UPI" ? "active" : ""}
-              onClick={() => setPaymentMode("UPI")}
-            >
-              UPI
-            </button>
-          </div>
-
-          {isUPI && (
-            <>
-              <label>UPI UTR Code</label>
-              <input
-                value={utr}
-                onChange={(e) => setUtr(e.target.value)}
-                placeholder="Enter UTR"
-              />
-            </>
-          )}
-
-          <button
-            className="pay-btn"
-            disabled={!isValid}
-            onClick={() => setShowReceipt(true)}
+          <input
+            placeholder="Search by Name"
+            value={nameSearch}
+            onChange={(e) => setNameSearch(e.target.value)}
+          />
+          <select
+            value={classFilter}
+            onChange={(e) => setClassFilter(e.target.value)}
           >
-            Pay & Generate Receipt
-          </button>
+            <option value="">All Classes</option>
+            {["Nursery","LKG","UKG","1st","2nd","3rd","4th","5th","6th","7th","8th"]
+              .map(cls => <option key={cls}>{cls}</option>)}
+          </select>
         </div>
-      )}
 
-      {/* RECEIPT */}
-      {showReceipt && (
-        <div className="receipt-wrapper">
-
-          <div className="print-bar">
-            <button className="icon-btn" onClick={() => window.print()}>
-              ⬇ Download / Print Receipt
-            </button>
+        {/* 👇 Selected Student */}
+        {selectedStudent && (
+          <div className="selected-student">
+            Selected: {selectedStudent.name} ({selectedStudent.currentClass})
           </div>
+        )}
 
-          <div className="receipt-card" id="print-area">
+        {/* 📋 Student List */}
+        <table className="fee-table">
+          <thead>
+            <tr>
+              <th>Reg No</th>
+              <th>Name</th>
+              <th>Class</th>
+            </tr>
+          </thead>
 
-            <div className="receipt-header">
-              <h1>Rashtra Bharti Public School</h1>
-              <p>Official Fee Receipt</p>
-            </div>
+          <tbody>
+            {filtered.map(student => (
+              <tr
+                key={student.registrationNumber}
+                onClick={() => handleSelect(student)}
+                className={
+                  selectedStudent?.registrationNumber === student.registrationNumber
+                    ? "row-selected"
+                    : ""
+                }
+                style={{ cursor: "pointer" }}
+              >
+                <td>{student.registrationNumber}</td>
+                <td>{student.name}</td>
+                <td>{student.currentClass}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-            <hr />
-
-            <div className="receipt-info">
-              <p><strong>Receipt No:</strong> {receiptNo}</p>
-              <p><strong>Date:</strong> {new Date().toLocaleDateString()}</p>
-            </div>
-
-            <div className="receipt-body">
-              <p><strong>Student Name:</strong> Avinash Kumar</p>
-              <p><strong>Class:</strong> UKG</p>
-              <p><strong>Payment Mode:</strong> {paymentMode}</p>
-              {isUPI && <p><strong>UTR:</strong> {utr}</p>}
-              <p className="amount"><strong>Amount Paid:</strong> ₹ {amount}</p>
-            </div>
-
-            <div className="receipt-footer">
-              <div>
-                <p>____________________</p>
-                <span>Authorized Signatory</span>
-              </div>
-
-              <div>
-                <p>School Seal</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      )}
-
+      </div>
     </div>
   );
 }

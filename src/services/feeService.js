@@ -1,34 +1,36 @@
-import api from "./apiClient";
+import apiClient from "./apiClient";
 
-/* ========= MASTER DATA ========= */
+/* ================= TUITION ================= */
 
+// GET all tuition fees
 export const getTuitionFees = () =>
-  api.get("/fee/tuition");
+  apiClient.get("/fees/config/tuition");
 
-export const updateTuitionFee = (className, amount) =>
-  api.put(`/fee/tuition/${className}`, { amount });
+// SET / UPDATE tuition fee
+export const setTuitionFee = (className, amount) =>
+  apiClient.put(`/fees/config/tuition/${className}`, { amount });
+
+/* ================= TRANSPORT ================= */
+
+export const getTransportFees = () =>
+  apiClient.get("/fees/config/transport");
+
+export const addTransportFee = (data) =>
+  apiClient.post("/fees/config/transport", data);
+
+export const updateTransportFee = (id, data) =>
+  apiClient.put(`/fees/config/transport/${id}`, data);
+
+export const deleteTransportFee = (id) =>
+  apiClient.delete(`/fees/config/transport/${id}`);
+
+/* ================= ANNUAL ================= */
 
 export const getAnnualFees = () =>
-  api.get("/fee/annual");
+  apiClient.get("/fees/config/annual");
 
-export const updateAnnualFee = (id, amount) =>
-  api.put(`/fee/annual/${id}`, { amount });
+export const addAnnualFee = (data) =>
+  apiClient.post("/fees/config/annual", data);
 
-export const getTransportRoutes = () =>
-  api.get("/fee/transport/routes");
-
-/* ========= OPERATIONS ========= */
-
-export const generateMonthlyFee = (payload) =>
-  api.post("/fee/generate", payload);
-
-export const payFee = (payload) =>
-  api.post("/fee/pay", payload);
-
-/* ========= QUERIES ========= */
-
-export const getStudentFeeLedger = (regNo) =>
-  api.get(`/fee/student/${regNo}`);
-
-export const getDefaulters = (month, year) =>
-  api.get(`/fee/defaulters?month=${month}&year=${year}`);
+export const deleteAnnualFee = (id) =>
+  apiClient.delete(`/fees/config/annual/${id}`);

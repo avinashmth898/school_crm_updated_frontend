@@ -1,0 +1,144 @@
+/* Full page */
+.fee-history-page {
+  min-height: 100vh;
+  padding: 30px;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #e5e7eb;
+}
+
+/* Profile Card */
+.student-profile-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  border: 1px solid #334155;
+  margin-bottom: 20px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 10px;
+  gap: 6px;
+}
+
+/* Title */
+.fee-history-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Export button */
+.export-btn {
+  margin-top: 10px;
+  background: #22c55e;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Summary cards */
+.summary-cards {
+  display: flex;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.summary-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid #334155;
+}
+
+/* Table */
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(2, 6, 23, 0.9);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #334155;
+}
+
+.fee-table th {
+  background: rgba(30, 58, 138, 0.6);
+  padding: 12px;
+}
+
+.fee-table td {
+  padding: 12px;
+  border-bottom: 1px solid #1f2937;
+}
+
+/* Hover */
+.clickable-row:hover {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.due-row {
+  border-left: 4px solid #ef4444;
+}
+
+/* Status */
+.status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.status.paid { color: #22c55e; }
+.status.partial { color: #eab308; }
+.status.due { color: #ef4444; }
+
+/* Receipt button */
+.receipt-btn {
+  background: rgba(37, 99, 235, 0.8);
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Header layout */
+.fee-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+/* Small print button */
+/* Small compact print button */
+.print-btn {
+  background: rgba(37, 99, 235, 0.85);
+  border: none;
+  padding: 4px 10px;   /* smaller */
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap; /* prevent stretching */
+  width: auto;         /* stop full width */
+  align-self: center;
+}
+
+
+/* Hide elements during print */
+@media print {
+  .no-print,
+  .print-btn {
+    display: none;
+  }
+
+  .fee-history-page {
+    background: white;
+    color: black;
+  }
+}
