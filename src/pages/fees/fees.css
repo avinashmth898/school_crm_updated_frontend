@@ -9,8 +9,9 @@ body {
 
 /* ===== FULL HEIGHT WRAPPER ===== */
 .fees-wrapper {
-  min-height: 100vh;       /* 🔥 fills screen */
-  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
 }
 
 .fees-title {
@@ -318,8 +319,10 @@ input, select {
 
 /* Smooth panel transition */
 .fees-content {
-  animation: fadeIn 0.25s ease-in-out;
-  min-height: 300px;
+  width: 100%;
+  max-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* Optional hover polish */
@@ -398,4 +401,12 @@ input, select {
 
 .fee-table tr:hover {
   background: rgba(255,255,255,0.08);
+}
+
+/* Full width for tables */
+.fees-content.full-width {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0; /* optional */
 }

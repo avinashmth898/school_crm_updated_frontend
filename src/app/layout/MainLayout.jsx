@@ -7,7 +7,7 @@ const MainLayout = () => {
 
       <Sidebar />
 
-      <div style={{ flex: 1, padding: "20px" }}>
+      <div style={{ flex: 1, overflow: "auto" }}>
         <Outlet />
       </div>
 

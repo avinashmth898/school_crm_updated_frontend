@@ -52,7 +52,7 @@ export default function FeesDashboard() {
         </div>
 
         {/* Dynamic Content Area */}
-        <div className="fees-content fee-card">
+        <div className={`fees-content ${activeTab === "defaulters" ? "full-width" : "fee-card"}`}>
           {renderContent()}
         </div>
 

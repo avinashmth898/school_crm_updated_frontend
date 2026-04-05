@@ -1,111 +1,12 @@
-/* Full page */
+/* ================= PAGE ================= */
 .fee-history-page {
-  min-height: 100vh;
-  padding: 30px;
-  background: linear-gradient(135deg, #0f172a, #020617);
-  color: #e5e7eb;
-}
-
-/* Profile Card */
-.student-profile-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
   padding: 20px;
-  backdrop-filter: blur(12px);
-  border: 1px solid #334155;
-  margin-bottom: 20px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: Arial, sans-serif;
 }
 
-.profile-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  margin-top: 10px;
-  gap: 6px;
-}
-
-/* Title */
-.fee-history-title {
-  margin: 0;
-  font-size: 26px;
-  font-weight: 600;
-}
-
-/* Export button */
-.export-btn {
-  margin-top: 10px;
-  background: #22c55e;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-}
-
-/* Summary cards */
-.summary-cards {
-  display: flex;
-  gap: 16px;
-  margin: 20px 0;
-}
-
-.summary-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 14px;
-  padding: 16px;
-  border: 1px solid #334155;
-}
-
-/* Table */
-.fee-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: rgba(2, 6, 23, 0.9);
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid #334155;
-}
-
-.fee-table th {
-  background: rgba(30, 58, 138, 0.6);
-  padding: 12px;
-}
-
-.fee-table td {
-  padding: 12px;
-  border-bottom: 1px solid #1f2937;
-}
-
-/* Hover */
-.clickable-row:hover {
-  background: rgba(59, 130, 246, 0.08);
-}
-
-.due-row {
-  border-left: 4px solid #ef4444;
-}
-
-/* Status */
-.status {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-}
-
-.status.paid { color: #22c55e; }
-.status.partial { color: #eab308; }
-.status.due { color: #ef4444; }
-
-/* Receipt button */
-.receipt-btn {
-  background: rgba(37, 99, 235, 0.8);
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-}
-
-/* Header layout */
+/* ================= HEADER ================= */
 .fee-history-header {
   display: flex;
   justify-content: space-between;
@@ -113,24 +14,210 @@
   margin-bottom: 10px;
 }
 
-
-/* Small print button */
-/* Small compact print button */
-.print-btn {
-  background: rgba(37, 99, 235, 0.85);
-  border: none;
-  padding: 4px 10px;   /* smaller */
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-  font-size: 12px;
-  white-space: nowrap; /* prevent stretching */
-  width: auto;         /* stop full width */
-  align-self: center;
+.fee-history-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e2e8f0;
 }
 
+/* ================= PROFILE ================= */
+.student-profile-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
 
-/* Hide elements during print */
+/* ================= FILTER ================= */
+.filter-section {
+  margin-bottom: 10px;
+}
+
+.filter-section label {
+  color: #e2e8f0;
+}
+
+.filter-section select {
+  padding: 4px;
+  font-size: 12px;
+}
+
+/* ================= SUMMARY ================= */
+.summary-cards {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.summary-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 8px;
+  font-size: 12px;
+  flex: 1;
+}
+
+.summary-card b {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.summary-card .paid {
+  color: #22c55e;
+}
+
+.summary-card .due {
+  color: #ef4444;
+}
+
+/* ================= TABLE WRAPPER ================= */
+.fee-table-wrapper {
+  overflow-x: auto;
+  opacity: 1 !important; /* 🔥 prevent fade */
+}
+
+/* ================= TABLE ================= */
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #ffffff !important;
+  color: #000 !important;
+  border: 1px solid #ccc;
+}
+
+/* HEADER */
+.fee-table th {
+  border: 1px solid #ccc;
+  padding: 6px;
+  font-size: 12px;
+  background: #f5f5f5;
+  text-align: center;
+  color: #000 !important;
+}
+
+/* CELLS */
+.fee-table td {
+  border: 1px solid #ddd;
+  padding: 6px;
+  font-size: 12px;
+  text-align: center;
+
+  white-space: nowrap;
+
+  color: #000 !important;
+  opacity: 1 !important;
+}
+
+/* REMOVE FADED ROWS */
+.fee-table tr {
+  background: #ffffff !important;
+}
+
+/* Zebra rows */
+.fee-table tr:nth-child(even) {
+  background: #f9f9f9 !important;
+}
+
+/* Hover */
+.clickable-row:hover {
+  background: #eef2f7 !important;
+}
+
+/* ================= COLUMN WIDTHS ================= */
+
+/* Month */
+.fee-table th:nth-child(1),
+.fee-table td:nth-child(1) {
+  width: 140px;
+  text-align: left;
+}
+
+/* Tuition, Transport, Annual, Total, Paid */
+.fee-table th:nth-child(2),
+.fee-table td:nth-child(2),
+.fee-table th:nth-child(3),
+.fee-table td:nth-child(3),
+.fee-table th:nth-child(4),
+.fee-table td:nth-child(4),
+.fee-table th:nth-child(5),
+.fee-table td:nth-child(5),
+.fee-table th:nth-child(6),
+.fee-table td:nth-child(6) {
+  width: 80px;
+  text-align: right;
+}
+
+/* Status */
+.fee-table th:nth-child(7),
+.fee-table td:nth-child(7) {
+  width: 60px;
+  text-align: center;
+}
+
+/* Payment Timestamp */
+.fee-table th:nth-child(8),
+.fee-table td:nth-child(8) {
+  width: 150px;
+  text-align: center;
+}
+
+/* Action */
+.fee-table th:nth-child(9),
+.fee-table td:nth-child(9) {
+  width: 60px;
+  text-align: center;
+}
+
+/* ================= STATUS ================= */
+.status {
+  font-size: 11px;
+  padding: 2px 6px;
+  border: 1px solid #ccc;
+  font-weight: 600;
+}
+
+.status.paid {
+  background: #e6ffe6;
+}
+
+.status.partial {
+  background: #fff5cc;
+}
+
+.status.due {
+  background: #ffe6e6;
+}
+
+/* ================= BUTTONS ================= */
+.pay-btn,
+.receipt-btn {
+  font-size: 10px;
+  padding: 2px 6px;
+  border: 1px solid #999;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* PRINT BUTTON */
+.print-btn {
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid #999;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+/* ================= EXPANDED ================= */
+.expanded-content {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+/* ================= PRINT ================= */
 @media print {
   .no-print,
   .print-btn {

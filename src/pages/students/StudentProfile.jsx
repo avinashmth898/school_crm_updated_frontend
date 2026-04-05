@@ -24,20 +24,44 @@ export default function StudentProfile() {
       {!isPrint && (
         <div className="dashboard-container">
 
+          {/* HERO */}
           <div className="student-hero">
             <div>
               <h1>{student.name}</h1>
               <p>Reg No: {student.registrationNumber}</p>
             </div>
-            <span className="class-badge">{student.currentClass}</span>
+
+            <span className="class-badge">
+              {student.currentClass}
+            </span>
           </div>
 
+          {/* ✅ BUTTONS BELOW PROFILE */}
+          <div className="actions-row">
+            <button onClick={() => navigate(`/students/${regNo}?print=1`)}>
+              🧾 Admission
+            </button>
+
+            <button onClick={() =>
+              navigate(`/students/${student.registrationNumber}/dashboard`)
+            }>
+              📘 Dashboard
+            </button>
+
+            <button onClick={() =>
+              navigate(`/students/${student.registrationNumber}/fee-history`)
+            }>
+              💰 Fees
+            </button>
+          </div>
+
+          {/* INFO CARDS */}
           <div className="info-cards">
+
             <div className="info-card">
               <h4>👨‍👩‍👧 Parents</h4>
               <p>Father: {student.fatherName}</p>
               <p>Mother: {student.motherName}</p>
-
             </div>
 
             <div className="info-card">
@@ -46,6 +70,26 @@ export default function StudentProfile() {
               <p>{student.address}</p>
               <p><b>Pin:</b> {student.pinCode}</p>
             </div>
+            <div className="info-card">
+                          <h4>📍 Address</h4>
+                          <p>Mobile: {student.mobileNumber}</p>
+                          <p>{student.address}</p>
+                          <p><b>Pin:</b> {student.pinCode}</p>
+                        </div>
+
+                        <div className="info-card">
+                                      <h4>📍 Address</h4>
+                                      <p>Mobile: {student.mobileNumber}</p>
+                                      <p>{student.address}</p>
+                                      <p><b>Pin:</b> {student.pinCode}</p>
+                                    </div>
+
+                                    <div className="info-card">
+                                                  <h4>📍 Address</h4>
+                                                  <p>Mobile: {student.mobileNumber}</p>
+                                                  <p>{student.address}</p>
+                                                  <p><b>Pin:</b> {student.pinCode}</p>
+                                                </div>
 
             <div className="info-card">
               <h4>📊 Attendance</h4>
@@ -60,58 +104,13 @@ export default function StudentProfile() {
               <p className="paid">Paid: ₹ {student.totalFeePaid}</p>
               <p className="due">Due: ₹ {student.totalFeeDue}</p>
             </div>
+
+
+
           </div>
 
-          <div className="actions">
-            <button
-              className="primary-btn wide"
-              onClick={() => navigate(`/students/${regNo}?print=1`)}
-            >
-              🧾 View Admission Confirmation
-            </button>
-
-
-            <button
-              className="primary-btn"
-              onClick={() =>
-                navigate(`/students/${student.registrationNumber}/dashboard`)
-              }
-            >
-              📘 Open Extended Dashboard
-            </button>
-          </div>
         </div>
       )}
-
-
-  <div className="actions">
-    <button
-      className="primary-btn wide"
-      onClick={() => navigate(`/students/${regNo}?print=1`)}
-    >
-      🧾 View Admission Confirmation
-    </button>
-
-    <button
-      className="primary-btn"
-      onClick={() =>
-        navigate(`/students/${student.registrationNumber}/dashboard`)
-      }
-    >
-      📘 Open Extended Dashboard
-    </button>
-
-    {/* ✅ NEW: Fee History Button */}
-    <button
-      className="primary-btn"
-      onClick={() =>
-        navigate(`/students/${student.registrationNumber}/fee-history`)
-      }
-    >
-      💰 Fee History
-    </button>
-  </div>
-
 
       {/* ================= PRINT VIEW ================= */}
       {isPrint && (
@@ -125,72 +124,48 @@ export default function StudentProfile() {
 
           <div className="admission-card" id="print-area">
 
-            {/* ===== PROFESSIONAL HEADER ===== */}
             <div className="admission-header">
               <h1>Rashtra Bharti Public School</h1>
-              <p>Survey No. 12, Station Road, Motihari – 845401</p>
-              <p>East Champaran, Bihar</p>
-              <p><strong>Affiliation No:</strong> RBPS/EDU/CBSE/2025/104</p>
+              <p>Motihari, Bihar</p>
               <p>Official Admission Confirmation</p>
             </div>
 
             <hr />
 
-            {/* ===== BODY ===== */}
             <div className="admission-body">
               <p>
-                This is to formally certify that <strong>{student.name}</strong>,
-                son/daughter of <strong>{student.fatherName}</strong> and
-                <strong> {student.motherName}</strong>, has been granted admission
-                to <strong>Rashtra Bharti Public School</strong> for the academic
-                session <strong>2025–2026</strong>, subject to the rules,
-                regulations, and policies of the institution.
+                This is to certify that <strong>{student.name}</strong>,
+                child of <strong>{student.fatherName}</strong> and{" "}
+                <strong>{student.motherName}</strong>, has been admitted.
               </p>
 
               <div className="info-grid">
-                <div><label>Registration Number</label><span>{student.registrationNumber}</span></div>
-                <div><label>Class Admitted</label><span>{student.currentClass}</span></div>
-                <div><label>Date of Admission</label><span>{student.admissionDate}</span></div>
-                <div><label>Mobile Number</label><span>{student.mobileNumber}</span></div>
-                <div><label>Residential Address</label><span>{student.address}</span></div>
+                <div><label>Reg No</label><span>{student.registrationNumber}</span></div>
+                <div><label>Class</label><span>{student.currentClass}</span></div>
+                <div><label>Date</label><span>{student.admissionDate}</span></div>
+                <div><label>Mobile</label><span>{student.mobileNumber}</span></div>
+                <div><label>Address</label><span>{student.address}</span></div>
               </div>
 
               <div className="status-grid">
-                <div><label>Attendance Record</label><span>{student.attendancePercentage}%</span></div>
-                <div><label>Total Fee Paid</label><span>₹ {student.totalFeePaid}</span></div>
-                <div><label>Outstanding Fee</label><span>₹ {student.totalFeeDue}</span></div>
+                <div><label>Attendance</label><span>{student.attendancePercentage}%</span></div>
+                <div><label>Paid</label><span>₹ {student.totalFeePaid}</span></div>
+                <div><label>Due</label><span>₹ {student.totalFeeDue}</span></div>
               </div>
 
-              <p className="note">
-                <strong>Terms & Conditions:</strong><br />
-                Admission is granted based on the information and documents submitted by
-                the parent or guardian. The school reserves the right to revoke or cancel
-                the admission if any information is found to be false, incomplete, or
-                misleading, or if institutional guidelines are not followed.
-              </p>
-
-              <p className="note">
-                This admission confirmation is valid only for the current academic session
-                and is subject to renewal in the subsequent session as per school policy.
-              </p>
             </div>
 
-            {/* ===== SIGNATURE ===== */}
             <div className="signature-section">
               <div>
-                <p>________________________</p>
-                <span>Authorized Signatory</span>
+                <p>__________________</p>
+                <span>Authorized Sign</span>
               </div>
 
               <div>
                 <p>Date: {student.admissionDate}</p>
-                <span>School Seal</span>
+                <span>Seal</span>
               </div>
             </div>
-
-            <p style={{ textAlign: "center", marginTop: "20px", fontSize: "12px" }}>
-              * This is a computer-generated document and does not require a physical signature.
-            </p>
 
           </div>
         </div>

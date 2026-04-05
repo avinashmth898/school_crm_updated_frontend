@@ -23,6 +23,10 @@ import TuitionFeePage from "../pages/command/TuitionFeePage";
 import FeeHistory from "../pages/fees/FeeHistory";
 import FeePaymentCheckoutPage from "../pages/fees/FeePaymentCheckoutPage";
 
+import FeeCheckout from "../pages/fees/PayFee";
+
+
+
 const Router = () => {
   return (
     <Routes>
@@ -55,6 +59,7 @@ const Router = () => {
         <Route path="students/:regNo/fee-history" element={<FeeHistory />} />
 {/*         <Route path="students/:regNo/pay-fee" element={<PayFee />} /> */}
         <Route path="students/:regNo/pay-fee" element={<FeePaymentCheckoutPage />} />
+{/*         <Route path="students/:regNo/pay-fee" element={<PayFee />} />PayFee */}
 
         {/* Students */}
         <Route path="students" element={<StudentSearchPage />} />

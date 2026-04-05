@@ -1,3 +1,4 @@
+/* ================= PAGE ================= */
 .dashboard-card {
   max-width: 950px;
   margin: auto;
@@ -13,6 +14,7 @@
   margin-bottom: 30px;
 }
 
+/* ================= SECTION ================= */
 .section {
   background: #141f32;
   padding: 18px 20px;
@@ -26,6 +28,7 @@
   color: #00bcd4;
 }
 
+/* ================= GRID ================= */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -33,6 +36,7 @@
   font-size: 14px;
 }
 
+/* ================= FEE SUMMARY ================= */
 .fee-summary {
   display: flex;
   justify-content: space-between;
@@ -42,6 +46,7 @@
 .paid { color: #00e676; }
 .due { color: #ff5252; }
 
+/* ================= ATTENDANCE ================= */
 .progress-bar {
   background: #253145;
   height: 12px;
@@ -54,6 +59,7 @@
   height: 100%;
 }
 
+/* ================= MONTHS ================= */
 .months {
   display: flex;
   flex-wrap: wrap;
@@ -64,18 +70,44 @@
   padding: 6px 12px;
   border-radius: 7px;
   font-size: 12px;
+  cursor: pointer;
 }
 
-.paid-box { background: #00bcd4; color: black; }
-.unpaid-box { background: #1c2a3d; }
+/* STATUS COLORS */
+.paid-box {
+  background: #00e676;
+  color: #000;
+}
 
+.partial-box {
+  background: #ffb300;
+  color: #000;
+}
+
+.unpaid-box {
+  background: #ff5252;
+  color: #fff;
+}
+
+.future-box {
+  background: transparent;
+  border: 1px dashed #555;
+  color: #777;
+}
+
+.current-month {
+  border: 2px solid #00e5ff;
+  box-shadow: 0 0 10px #00e5ff;
+}
+
+/* ================= TRANSPORT ================= */
 .transport-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Switch */
+/* ================= TOGGLE SWITCH ================= */
 .switch {
   position: relative;
   display: inline-block;
@@ -116,34 +148,7 @@ input:checked + .slider:before {
   transform: translateX(22px);
 }
 
-.paid-box {
-  background: #00e676;
-  color: #000;
-}
-
-.partial-box {
-  background: #ffb300;
-  color: #000;
-}
-
-.unpaid-box {
-  background: #ff5252;
-  color: #fff;
-}
-
-.current-month {
-  border: 2px solid #00e5ff;
-  box-shadow: 0 0 10px #00e5ff;
-}
-
-
-.future-box {
-  background: transparent;
-  border: 1px dashed #555;
-  color: #777;
-}
-
-/* ===== RECEIPT MODAL ===== */
+/* ================= RECEIPT MODAL ================= */
 .receipt-modal {
   position: fixed;
   top: 0;
@@ -170,18 +175,52 @@ input:checked + .slider:before {
   padding: 6px 10px;
 }
 
+/* PRINT BAR */
 .print-bar {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
+/* ================= ACTION BUTTON ================= */
+.actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.actions button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #00e676;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ================= PRINT LOGIC ================= */
 @media print {
+
   body * {
     visibility: hidden;
   }
 
-  .receipt-card, .receipt-card * {
+  /* 🔥 FULL PAGE PRINT */
+  .dashboard-card.print-full,
+  .dashboard-card.print-full * {
+    visibility: visible;
+  }
+
+  .dashboard-card.print-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  /* 🔥 RECEIPT PRINT */
+  .receipt-card,
+  .receipt-card * {
     visibility: visible;
   }
 
@@ -192,7 +231,16 @@ input:checked + .slider:before {
     width: 100%;
   }
 
-  .print-bar {
-    display: none;
+  /* HIDE BUTTONS */
+  .print-bar,
+  .actions {
+    display: none !important;
   }
+}
+
+.future-tile {
+  background: transparent;
+  border: 1px dashed #555;
+  color: #777;
+  cursor: default;
 }

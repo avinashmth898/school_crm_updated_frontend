@@ -1,10 +1,14 @@
 import "./StudentRegistrationPage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerStudent } from "../../services/studentService";
+import { getTransportFees } from "../../services/transportService";
+import { assignTransport } from "../../services/studentTransportationService";
 
 export default function StudentRegistrationPage() {
   const navigate = useNavigate();
+
+  const [transportFees, setTransportFees] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -15,13 +19,27 @@ export default function StudentRegistrationPage() {
     currentClass: "",
     mobileNumber: "",
     aadharNumber: "",
+    usesTransport: "false", // ✅ string
+    transportFeeId: "",
   });
 
+  // ✅ Load routes
+  useEffect(() => {
+    const loadFees = async () => {
+      try {
+        const res = await getTransportFees();
+        setTransportFees(res.data || []);
+      } catch (err) {
+        console.error("Failed to load transport fees", err);
+      }
+    };
+
+    loadFees();
+  }, []);
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -29,9 +47,14 @@ export default function StudentRegistrationPage() {
 
     try {
       const res = await registerStudent(formData);
+      const regNo = res.data.registrationNumber;
 
-      // ✅ Navigate directly to profile page
-      navigate(`/students/${res.data.registrationNumber}`);
+      // ✅ assign transport
+      if (formData.usesTransport === "true" && formData.transportFeeId) {
+        await assignTransport(regNo, formData.transportFeeId);
+      }
+
+      navigate(`/students/${regNo}`);
     } catch (err) {
       console.error(err);
       alert("Registration failed");
@@ -44,7 +67,6 @@ export default function StudentRegistrationPage() {
         <h2>New Student Registration</h2>
 
         <form onSubmit={handleSubmit} className="student-form">
-
           <input
             name="name"
             placeholder="Student Name"
@@ -124,6 +146,8 @@ export default function StudentRegistrationPage() {
               required
             />
           </div>
+
+          {/* Transport Toggle */}
           <div className="row">
             <select
               name="usesTransport"
@@ -131,7 +155,8 @@ export default function StudentRegistrationPage() {
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  usesTransport: e.target.value === "true"
+                  usesTransport: e.target.value,
+                  transportFeeId: "",
                 })
               }
             >
@@ -139,29 +164,30 @@ export default function StudentRegistrationPage() {
               <option value="true">Transport Required? — Yes</option>
             </select>
           </div>
-{formData.usesTransport && (
-  <select
-    name="transportRouteCode"
-    value={formData.transportRouteCode}
-    onChange={handleChange}
-    required
-  >
-    <option value="">Select Transport Route</option>
-    {Array.from({ length: 20 }, (_, i) => (
-      <option key={i + 1} value={`ADDRESS_${i + 1}`}>
-        Address {i + 1}
-      </option>
-    ))}
-  </select>
-)}
+
+          {/* Transport dropdown */}
+          {formData.usesTransport === "true" && (
+            <select
+              name="transportFeeId"
+              value={formData.transportFeeId}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Route</option>
+              {transportFees.map((t) => (
+                <option key={t.id} value={t.transportFeeId}>
+                  {t.routeName} — ₹{t.amount}
+                </option>
+              ))}
+            </select>
+          )}
+
 
 
           <button type="submit" className="primary-btn">
             Register Student
           </button>
-
         </form>
-
       </div>
     </div>
   );
