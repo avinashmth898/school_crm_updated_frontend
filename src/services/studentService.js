@@ -3,7 +3,7 @@ import { getToken } from "../auth/authStorage";
 
 export const registerStudent = (data) => {
   return axios.post(
-    "http://localhost:8080/api/students",
+    "https://edschoolak.onrender.com/api/students",
     data,
     {
       headers: {
