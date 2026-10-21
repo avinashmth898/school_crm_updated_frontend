@@ -1,0 +1,175 @@
+.finance-page {
+  padding: 30px;
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, #0c1424, #101c36);
+  color: white;
+}
+
+/* HEADER */
+.finance-header {
+  margin-bottom: 25px;
+}
+
+.finance-header h1 {
+  margin-bottom: 5px;
+}
+
+.finance-header p {
+  opacity: 0.7;
+  font-size: 13px;
+}
+
+/* METRICS */
+.metrics-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 25px;
+}
+
+/* CARD */
+.metric-card {
+  background: rgba(255,255,255,0.05);
+
+  border-radius: 16px;
+
+  padding: 22px;
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  transition: 0.25s;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+}
+
+.metric-card span {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.metric-card h2 {
+  margin-top: 12px;
+  font-size: 28px;
+}
+
+/* TOTAL CARD */
+.metric-card.total {
+  background:
+    linear-gradient(135deg, #00c853, #00e676);
+
+  color: black;
+}
+
+/* TABLE CARD */
+.transaction-card {
+  background: rgba(255,255,255,0.05);
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* HEADER */
+.table-header {
+  padding: 18px 20px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.05);
+}
+
+/* TABLE */
+.transaction-table {
+  width: 100%;
+}
+
+/* HEAD */
+.table-head {
+  display: grid;
+
+  grid-template-columns:
+    1.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
+
+  padding: 14px 20px;
+
+  background: rgba(255,255,255,0.04);
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+/* ROW */
+.table-row {
+  display: grid;
+
+  grid-template-columns:
+    1.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
+
+  padding: 15px 20px;
+
+  border-top:
+    1px solid rgba(255,255,255,0.05);
+
+  align-items: center;
+
+  transition: 0.2s;
+}
+
+.table-row:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+/* RECEIPT */
+.receipt {
+  color: #00e676;
+  font-weight: 600;
+}
+
+/* MODE */
+.mode {
+  width: fit-content;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+.mode.cash {
+  background: rgba(255,193,7,0.15);
+  color: #ffc107;
+}
+
+.mode.upi {
+  background: rgba(0,255,150,0.15);
+  color: #00e676;
+}
+
+.mode.card {
+  background: rgba(0,150,255,0.15);
+  color: #42a5f5;
+}
+
+.mode.cheque {
+  background: rgba(255,82,82,0.15);
+  color: #ff5252;
+}
+
+/* TIME */
+.time {
+  opacity: 0.7;
+  font-size: 12px;
+}
