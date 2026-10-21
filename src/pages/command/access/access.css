@@ -1,0 +1,106 @@
+.access-form-card {
+  margin-bottom: 18px;
+}
+
+.access-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  align-items: end;
+}
+
+.access-form label,
+.access-form-card > label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.access-form input,
+.access-form select,
+.access-form-card select {
+  padding: 9px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  box-sizing: border-box;
+}
+
+.access-form button {
+  height: fit-content;
+}
+
+.access-error {
+  margin-top: 10px;
+  color: var(--red-600);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.access-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.access-badge-ok {
+  background: var(--teal-50);
+  color: var(--teal-600);
+}
+
+.access-badge-off {
+  background: var(--red-50);
+  color: var(--red-600);
+}
+
+.access-row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.access-subject-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.access-chip {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--ink-50);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.access-chip-on {
+  background: var(--accent-50);
+  border-color: var(--accent-200);
+  color: var(--accent-800);
+}
+
+.access-muted {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .access-form {
+    grid-template-columns: 1fr;
+  }
+
+  .access-row-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

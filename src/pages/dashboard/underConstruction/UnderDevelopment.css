@@ -1,0 +1,74 @@
+.underdev-page {
+  position: relative;
+  min-height: 100%;
+  background: var(--page-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  padding: 40px 20px;
+}
+
+/* Language switcher is already available app-wide in the top bar; this
+   extra copy sits directly on the Attendance placeholder per the request
+   to "embed this language button [on the] attendance tab" specifically. */
+.underdev-lang-row {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.underdev-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  padding: 40px 50px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  max-width: 420px;
+}
+
+.underdev-card h1 {
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.tag {
+  color: var(--amber-600);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.underdev-card button {
+  background: var(--accent-600);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  color: var(--text-on-accent);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.underdev-card button:hover {
+  background: var(--accent-800);
+  transform: translateY(-1px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .underdev-card {
+    padding: 28px 24px;
+  }
+
+  .underdev-lang-row {
+    top: 12px;
+    right: 12px;
+  }
+}

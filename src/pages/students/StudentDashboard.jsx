@@ -3,9 +3,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getStudentProfile } from "../../services/studentService";
 import apiClient from "../../services/apiClient";
+import { useToast } from "../../ui/ToastContext";
+import { useConfirm } from "../../ui/ConfirmContext";
 
 export default function StudentDashboard() {
   const { regNo } = useParams();
+  const toast = useToast();
+  const confirm = useConfirm();
 
   const [student, setStudent] = useState(null);
   const [transport, setTransport] = useState(null);
@@ -75,7 +79,8 @@ export default function StudentDashboard() {
       ? "Stop transport service?"
       : "Start transport service?";
 
-    if (!window.confirm(confirmMsg)) return;
+    const ok = await confirm(confirmMsg);
+    if (!ok) return;
 
     setLoadingTransport(true);
 
@@ -95,7 +100,7 @@ export default function StudentDashboard() {
         await fetchTransport();
       }
     } catch {
-      alert("Transport update failed");
+      toast.error("Transport update failed");
     } finally {
       setLoadingTransport(false);
     }
@@ -110,7 +115,7 @@ export default function StudentDashboard() {
       });
       await fetchTransport();
     } catch {
-      alert("Route change failed");
+      toast.error("Route change failed");
     }
   };
 

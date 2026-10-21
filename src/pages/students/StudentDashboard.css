@@ -2,11 +2,12 @@
 .dashboard-card {
   max-width: 950px;
   margin: auto;
-  background: #0f1724;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
   padding: 30px;
-  border-radius: 18px;
-  color: #fff;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-card);
 }
 
 .dashboard-header {
@@ -16,16 +17,18 @@
 
 /* ================= SECTION ================= */
 .section {
-  background: #141f32;
+  background: var(--ink-50);
+  border: 1px solid var(--border);
   padding: 18px 20px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   margin-bottom: 18px;
 }
 
 .section h2 {
-  font-size: 17px;
+  font-size: 16px;
+  font-weight: 700;
   margin-bottom: 10px;
-  color: #00bcd4;
+  color: var(--accent-800);
 }
 
 /* ================= GRID ================= */
@@ -36,26 +39,24 @@
   font-size: 14px;
 }
 
-/* ================= FEE SUMMARY ================= */
-.fee-summary {
-  display: flex;
-  justify-content: space-between;
-  font-size: 15px;
-}
+/* Dead ".fee-summary" rule removed — this file never uses that class,
+   but being bundled globally it was colliding with the real, in-use
+   .fee-summary panel on the Check Fee page (fees.css) and forcing it
+   into a squeezed, space-between flex row instead of a stacked panel. */
 
-.paid { color: #00e676; }
-.due { color: #ff5252; }
+.paid { color: var(--teal-600); font-weight: 700; }
+.due { color: var(--red-600); font-weight: 700; }
 
 /* ================= ATTENDANCE ================= */
 .progress-bar {
-  background: #253145;
+  background: var(--ink-200);
   height: 12px;
   border-radius: 8px;
   overflow: hidden;
 }
 
 .progress-fill {
-  background: #00e676;
+  background: var(--teal-400);
   height: 100%;
 }
 
@@ -68,36 +69,40 @@
 
 .month {
   padding: 6px 12px;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
 }
 
 /* STATUS COLORS */
 .paid-box {
-  background: #00e676;
-  color: #000;
+  background: var(--teal-50);
+  color: var(--teal-800);
+  border: 1px solid var(--teal-100);
 }
 
 .partial-box {
-  background: #ffb300;
-  color: #000;
+  background: var(--amber-50);
+  color: var(--amber-600);
+  border: 1px solid var(--amber-100);
 }
 
 .unpaid-box {
-  background: #ff5252;
-  color: #fff;
+  background: var(--red-50);
+  color: var(--red-600);
+  border: 1px solid var(--red-100);
 }
 
 .future-box {
   background: transparent;
-  border: 1px dashed #555;
-  color: #777;
+  border: 1px dashed var(--border-strong);
+  color: var(--text-muted);
 }
 
 .current-month {
-  border: 2px solid #00e5ff;
-  box-shadow: 0 0 10px #00e5ff;
+  border: 2px solid var(--accent-400);
+  box-shadow: 0 0 0 3px var(--accent-50);
 }
 
 /* ================= TRANSPORT ================= */
@@ -122,7 +127,7 @@
 .slider {
   position: absolute;
   cursor: pointer;
-  background: #253145;
+  background: var(--ink-200);
   border-radius: 34px;
   inset: 0;
   transition: 0.3s;
@@ -138,10 +143,11 @@
   background: white;
   border-radius: 50%;
   transition: 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 input:checked + .slider {
-  background: linear-gradient(135deg, #00e676, #00c853);
+  background: var(--teal-400);
 }
 
 input:checked + .slider:before {
@@ -155,7 +161,7 @@ input:checked + .slider:before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(15, 23, 42, 0.45);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,9 +172,10 @@ input:checked + .slider:before {
   background: white;
   color: black;
   padding: 30px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   width: 400px;
   max-width: 90%;
+  box-shadow: var(--shadow-raised);
 }
 
 .receipt-table td {
@@ -191,11 +198,15 @@ input:checked + .slider:before {
 .actions button {
   padding: 10px 18px;
   border: none;
-  border-radius: 8px;
-  background: #00e676;
-  color: black;
-  font-weight: bold;
+  border-radius: var(--radius-sm);
+  background: var(--accent-600);
+  color: white;
+  font-weight: 700;
   cursor: pointer;
+}
+
+.actions button:hover {
+  background: var(--accent-800);
 }
 
 /* ================= PRINT LOGIC ================= */
@@ -205,7 +216,7 @@ input:checked + .slider:before {
     visibility: hidden;
   }
 
-  /* 🔥 FULL PAGE PRINT */
+  /* FULL PAGE PRINT */
   .dashboard-card.print-full,
   .dashboard-card.print-full * {
     visibility: visible;
@@ -218,7 +229,7 @@ input:checked + .slider:before {
     width: 100%;
   }
 
-  /* 🔥 RECEIPT PRINT */
+  /* RECEIPT PRINT */
   .receipt-card,
   .receipt-card * {
     visibility: visible;
@@ -240,7 +251,7 @@ input:checked + .slider:before {
 
 .future-tile {
   background: transparent;
-  border: 1px dashed #555;
-  color: #777;
+  border: 1px dashed var(--border-strong);
+  color: var(--text-muted);
   cursor: default;
 }

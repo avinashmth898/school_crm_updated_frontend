@@ -1,0 +1,348 @@
+/* =========================================================
+   EDNUVO — GLOBAL DESIGN TOKENS ("Ocean calm")
+   Command Hub design language: light surfaces, flat cards,
+   one calm accent color, generous whitespace. Every page
+   should read off these variables instead of hardcoding
+   its own dark background / neon accent.
+   ========================================================= */
+
+:root {
+  /* Accent (blue) */
+  --accent-50:  #E6F1FB;
+  --accent-100: #B5D4F4;
+  --accent-200: #85B7EB;
+  --accent-400: #378ADD;
+  --accent-600: #185FA5;
+  --accent-800: #0C447C;
+  --accent-900: #042C53;
+
+  /* Secondary accent (teal) — success / positive / money-in */
+  --teal-50:  #E1F5EE;
+  --teal-100: #9FE1CB;
+  --teal-200: #5DCAA5;
+  --teal-400: #1D9E75;
+  --teal-600: #0F6E56;
+  --teal-800: #085041;
+
+  /* Warm accent (amber) — pending / attention */
+  --amber-50:  #FAEEDA;
+  --amber-100: #FAC775;
+  --amber-400: #BA7517;
+  --amber-600: #854F0B;
+
+  /* Danger (red) — overdue / destructive */
+  --red-50:  #FCEBEB;
+  --red-100: #F7C1C1;
+  --red-400: #E24B4A;
+  --red-600: #A32D2D;
+
+  /* Neutrals */
+  --ink-900: #0f172a;
+  --ink-800: #1e293b;
+  --ink-600: #475569;
+  --ink-400: #94a3b8;
+  --ink-200: #e2e8f0;
+  --ink-100: #f1f5f9;
+  --ink-50:  #f8fafc;
+
+  /* Surfaces */
+  --page-bg: #eef2f8;
+  --surface-0: #f8fafc;
+  --surface-1: #ffffff;
+  --surface-2: #ffffff;
+
+  /* Text */
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-600);
+  --text-muted: var(--ink-400);
+  --text-on-accent: #ffffff;
+
+  /* Borders */
+  --border: var(--ink-200);
+  --border-strong: #cbd5e1;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Elevation — kept subtle on purpose, this is a flat design */
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-raised: 0 8px 24px rgba(15, 23, 42, 0.10);
+
+  /* Typography */
+  --font-sans: "Segoe UI", "Inter", system-ui, -apple-system, Arial, sans-serif;
+
+  /* Shell sizing */
+  --shell-topbar-h: 60px;
+  --shell-rail-w: 76px;
+}
+
+/* =========================================================
+   THEME PALETTES
+   The :root block above is the "light" / Daylight default.
+   Each alternate theme overrides the same custom properties
+   under [data-theme="..."], set on <html> by ThemeProvider
+   (src/theme/ThemeContext.jsx). Because every component reads
+   colors through var(--...), switching the attribute re-skins
+   the whole app with no per-component changes.
+   ========================================================= */
+
+/* ---- Dark / "Midnight" ---- */
+[data-theme="dark"] {
+  --accent-50:  #15314f;
+  --accent-100: #1c4066;
+  --accent-200: #2a5a8c;
+  --accent-400: #4e8fcf;
+  --accent-600: #6fb0ec;
+  --accent-800: #a9d2f7;
+  --accent-900: #e6f1fb;
+
+  --teal-50:  #103329;
+  --teal-100: #15493b;
+  --teal-200: #1c6350;
+  --teal-400: #2fa884;
+  --teal-600: #4fd3a9;
+  --teal-800: #a7ecd4;
+
+  --amber-50:  #3a2c12;
+  --amber-100: #5c451a;
+  --amber-400: #e0a847;
+  --amber-600: #f5c879;
+
+  --red-50:  #3a1616;
+  --red-100: #5c2020;
+  --red-400: #e2726f;
+  --red-600: #f3a7a4;
+
+  --ink-900: #f1f5f9;
+  --ink-800: #e2e8f0;
+  --ink-600: #b9c2cf;
+  --ink-400: #7c8a9c;
+  --ink-200: #2a3444;
+  --ink-100: #202938;
+  --ink-50:  #1a222e;
+
+  --page-bg: #0f1621;
+  --surface-0: #141c28;
+  --surface-1: #1a222e;
+  --surface-2: #202938;
+
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-600);
+  --text-muted: var(--ink-400);
+  --text-on-accent: #0b1220;
+
+  --border: var(--ink-200);
+  --border-strong: #3a4556;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-raised: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+/* ---- "Forest" — calm light theme, green accent ---- */
+[data-theme="forest"] {
+  --accent-50:  #E4F3EA;
+  --accent-100: #B7E0C7;
+  --accent-200: #8ACCA4;
+  --accent-400: #3F9A68;
+  --accent-600: #1F7649;
+  --accent-800: #155436;
+  --accent-900: #0C3522;
+
+  --teal-50:  #E1F5EE;
+  --teal-100: #9FE1CB;
+  --teal-200: #5DCAA5;
+  --teal-400: #1D9E75;
+  --teal-600: #0F6E56;
+  --teal-800: #085041;
+
+  --amber-50:  #FAEEDA;
+  --amber-100: #FAC775;
+  --amber-400: #BA7517;
+  --amber-600: #854F0B;
+
+  --red-50:  #FCEBEB;
+  --red-100: #F7C1C1;
+  --red-400: #E24B4A;
+  --red-600: #A32D2D;
+
+  --ink-900: #14241c;
+  --ink-800: #223429;
+  --ink-600: #4d6358;
+  --ink-400: #8ba296;
+  --ink-200: #dbe9e1;
+  --ink-100: #eef5f1;
+  --ink-50:  #f6faf8;
+
+  --page-bg: #eef5f1;
+  --surface-0: #f6faf8;
+  --surface-1: #ffffff;
+  --surface-2: #ffffff;
+
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-600);
+  --text-muted: var(--ink-400);
+  --text-on-accent: #ffffff;
+
+  --border: var(--ink-200);
+  --border-strong: #bcd3c7;
+}
+
+/* ---- "Sunset" — warm light theme, amber/orange accent ---- */
+[data-theme="sunset"] {
+  --accent-50:  #FCEEE3;
+  --accent-100: #F6C9A3;
+  --accent-200: #EFA363;
+  --accent-400: #DD7A2B;
+  --accent-600: #B75A14;
+  --accent-800: #8A4310;
+  --accent-900: #5C2C0B;
+
+  --teal-50:  #E1F5EE;
+  --teal-100: #9FE1CB;
+  --teal-200: #5DCAA5;
+  --teal-400: #1D9E75;
+  --teal-600: #0F6E56;
+  --teal-800: #085041;
+
+  --amber-50:  #FDF0DA;
+  --amber-100: #F9CF8F;
+  --amber-400: #C8821C;
+  --amber-600: #8F5A0E;
+
+  --red-50:  #FCEBEB;
+  --red-100: #F7C1C1;
+  --red-400: #E24B4A;
+  --red-600: #A32D2D;
+
+  --ink-900: #2a1d14;
+  --ink-800: #3c2c20;
+  --ink-600: #6b584a;
+  --ink-400: #a6917f;
+  --ink-200: #f0e2d6;
+  --ink-100: #f8efe6;
+  --ink-50:  #fdf8f3;
+
+  --page-bg: #fdf3ea;
+  --surface-0: #fdf8f3;
+  --surface-1: #ffffff;
+  --surface-2: #ffffff;
+
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-600);
+  --text-muted: var(--ink-400);
+  --text-on-accent: #ffffff;
+
+  --border: var(--ink-200);
+  --border-strong: #e0c5ad;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+/* ---- shared, reusable building blocks any page can opt into ---- */
+
+.ch-page {
+  background: var(--page-bg);
+  min-height: 100%;
+  padding: 28px 32px;
+  color: var(--text-primary) !important;
+}
+
+.ch-card {
+  background: var(--surface-1) !important;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 20px 22px;
+}
+
+.ch-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  margin: 0 0 4px;
+}
+
+.ch-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary) !important;
+  margin: 0;
+}
+
+.ch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ch-btn:hover {
+  background: var(--ink-50);
+}
+
+.ch-btn-primary {
+  background: var(--accent-600);
+  border-color: var(--accent-600);
+  color: #ffffff;
+}
+
+.ch-btn-primary:hover {
+  background: var(--accent-800);
+}
+
+.ch-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ch-table thead th {
+  background: var(--ink-900) !important;
+  color: #ffffff !important;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 11px 14px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.ch-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ink-200);
+  background: var(--surface-1) !important;
+  color: var(--ink-900) !important;
+  white-space: nowrap;
+}
+
+.ch-table tbody tr:nth-child(even) td {
+  background: var(--ink-50) !important;
+}
+
+.ch-table tbody tr:hover td {
+  background: var(--accent-50) !important;
+}

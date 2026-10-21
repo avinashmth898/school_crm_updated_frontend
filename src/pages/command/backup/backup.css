@@ -1,0 +1,127 @@
+.backup-page {
+  max-width: 720px;
+}
+
+.backup-page h2 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.backup-sub {
+  margin: 0 0 20px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.backup-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.backup-card-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-50);
+  color: var(--accent-600);
+}
+
+.backup-card-danger .backup-card-icon {
+  background: var(--red-50);
+  color: var(--red-600);
+}
+
+.backup-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.backup-card-body h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.backup-card-body p {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.backup-card-body input[type="file"] {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.backup-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.backup-btn {
+  flex-shrink: 0;
+  width: auto;
+  margin-top: 0;
+  padding: 10px 18px;
+  white-space: nowrap;
+}
+
+.backup-btn-danger {
+  background: var(--red-600);
+}
+
+.backup-btn-danger:hover {
+  background: var(--red-700, #a32d2d);
+}
+
+.backup-log {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.backup-log summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.backup-log pre {
+  white-space: pre-wrap;
+  background: var(--ink-50);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-top: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+  .backup-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .backup-btn {
+    width: 100%;
+  }
+}

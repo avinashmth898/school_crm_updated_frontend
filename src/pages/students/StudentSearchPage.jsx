@@ -1,21 +1,30 @@
 import "./student.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import apiClient from "../../services/apiClient";
 import { getAllStudents } from "../../services/studentService";
+import EmptyState from "../../ui/EmptyState";
+import Icon from "../../ui/icons";
 
 export default function StudentSearchPage() {
   const [students, setStudents] = useState([]);
+  const [classes, setClasses] = useState([]);
   const [filters, setFilters] = useState({
     regNo: "",
     name: "",
-    className: ""
+    className: "",
+    status: "ACTIVE",
   });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAllStudents().then(res => setStudents(res.data));
+    apiClient.get("/classes").then(res => setClasses(res.data || [])).catch(console.error);
   }, []);
+
+  useEffect(() => {
+    getAllStudents(filters.status).then(res => setStudents(res.data));
+  }, [filters.status]);
 
   const filteredStudents = students.filter(s => {
     return (
@@ -75,17 +84,21 @@ export default function StudentSearchPage() {
             }
           >
             <option value="">All Classes</option>
-            <option>Nursery</option>
-            <option>LKG</option>
-            <option>UKG</option>
-            <option>1st</option>
-            <option>2nd</option>
-            <option>3rd</option>
-            <option>4th</option>
-            <option>5th</option>
-            <option>6th</option>
-            <option>7th</option>
-            <option>8th</option>
+            {classes.map(c => (
+              <option key={c.id} value={c.className}>{c.className}</option>
+            ))}
+          </select>
+
+          <select
+            value={filters.status}
+            onChange={(e) =>
+              setFilters({ ...filters, status: e.target.value })
+            }
+          >
+            <option value="ACTIVE">Active</option>
+            <option value="WITHDRAWN">Withdrawn</option>
+            <option value="GRADUATED">Graduated</option>
+            <option value="ALL">All</option>
           </select>
         </div>
 
@@ -95,10 +108,12 @@ export default function StudentSearchPage() {
             <thead>
               <tr>
                 <th>Reg No</th>
+                <th>Admission No</th>
                 <th>Name</th>
                 <th>Father’s Name</th>
                 <th>Class</th>
                 <th>Mobile</th>
+                <th>Status</th>
               </tr>
             </thead>
 
@@ -111,17 +126,19 @@ export default function StudentSearchPage() {
                   }
                 >
                   <td>{student.registrationNumber}</td>
+                  <td>{student.admissionNumber}</td>
                   <td>{student.name}</td>
                   <td>{student.fatherName}</td>
                   <td>{student.currentClass}</td>
                   <td>{student.mobileNumber || "-"}</td>
+                  <td>{student.status || "ACTIVE"}</td>
                 </tr>
               ))}
 
               {filteredStudents.length === 0 && (
                 <tr>
-                  <td colSpan="5" className="empty-row">
-                    No students found
+                  <td colSpan="6" className="empty-row">
+                    <EmptyState icon={Icon.Search} message="No students found. Try a different name, class, or filter." />
                   </td>
                 </tr>
               )}

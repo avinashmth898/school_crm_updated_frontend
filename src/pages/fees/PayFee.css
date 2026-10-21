@@ -5,22 +5,22 @@
 /* ── Background ── */
 .student-bg {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f1b2d, #1a2f4e);
+  background: var(--page-bg);
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 40px 20px;
+  padding: 32px 20px;
   box-sizing: border-box;
 }
 
 /* ── Card ── */
 .profile-card {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(16px);
-  border-radius: 18px;
-  padding: 35px;
-  color: white;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  color: var(--text-primary);
   width: 100%;
   max-width: 520px;
 }
@@ -29,80 +29,138 @@
   max-width: 820px;
 }
 
+/* PayFee is now only ever rendered nested inside FeesDashboard's own
+   card (.fees-content.fee-card), not as a standalone full-page route
+   anymore. Left as-is, the 820px cap + min-height:100vh below made it
+   float as a narrow card inside a much wider outer card — that's the
+   "half stretched" search bar and the large empty gap under the table.
+   Scoped to .fees-content so the other standalone pages that reuse
+   .profile-card.wide (Tuition/Transport/Session charge setup) keep
+   their normal centered-card look. */
+.fees-content .profile-card.wide {
+  max-width: none;
+  width: 100%;
+}
+
+.fees-content .student-bg {
+  min-height: 0;
+  padding: 0;
+}
+
 .profile-card h2 {
-  font-size: 24px;
-  margin-bottom: 22px;
+  font-size: 22px;
+  margin-bottom: 20px;
   font-weight: 700;
+  color: var(--text-primary);
 }
 
 /* ── Filter Row ── */
+/* Registration number, Name, and Class each get their own full-width
+   row, stacked top to bottom — not side by side on one line.
+   fees.css (shared with the Check Fee tab, bundled globally by Vite)
+   also defines a plain `.filter-row { display: flex; ... }` — same class
+   name, same specificity. Whichever file happens to load later in the
+   bundle wins ties, so !important here makes sure this stacked layout
+   is the one that actually renders. */
 .filter-row {
-  display: flex;
+  display: grid !important;
+  grid-template-columns: 1fr;
+  align-items: center;
   gap: 12px;
   margin-bottom: 18px;
-  flex-wrap: wrap;
+  width: 100%;
 }
 
 .filter-row input,
 .filter-row select {
-  flex: 1;
-  min-width: 160px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  width: 100% !important;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
   font-size: 14px;
   outline: none;
-  transition: border 0.2s ease;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease;
+}
+
+.filter-row select {
+  cursor: pointer;
 }
 
 .filter-row input::placeholder {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
+}
+
+.filter-row input:hover,
+.filter-row select:hover {
+  border-color: var(--border-strong);
 }
 
 .filter-row input:focus,
 .filter-row select:focus {
-  border-color: #00c6ff;
+  border-color: var(--accent-400);
 }
 
 .filter-row select option {
-  background: #1a2f4e;
-  color: white;
+  background: var(--surface-1);
+  color: var(--text-primary);
 }
 
 /* ── Fee Table ── */
+.fee-table-count {
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* The roster now shows every matching student rather than capping at a
+   handful — scroll the table body instead of letting the page itself
+   grow to the height of the whole school. */
+.fee-table-scroll {
+  max-height: 460px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
 .fee-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 0;
 }
 
 .fee-table thead th {
   text-align: left;
-  padding: 12px 14px;
-  font-size: 13px;
-  color: #9fb3c8;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  font-weight: 600;
+  padding: 11px 14px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  background: var(--surface-1);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .fee-table tbody td {
-  padding: 13px 14px;
-  font-size: 15px;
-  color: #e8edf5;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
 }
 
 .fee-table tbody tr {
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.15s ease;
 }
 
-.fee-table tbody tr:hover {
-  background: rgba(0, 198, 255, 0.1);
+.fee-table tbody tr:hover td {
+  background: var(--accent-50);
 }
 
 .fee-table tbody tr:last-child td {
@@ -117,47 +175,47 @@
 }
 
 .checkout-box p {
-  font-size: 15px;
+  font-size: 14.5px;
   margin: 0;
-  color: #d0dce8;
+  color: var(--text-secondary);
 }
 
 .checkout-box p strong {
-  color: white;
+  color: var(--text-primary);
   margin-right: 6px;
 }
 
 .checkout-box hr {
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid var(--border);
   margin: 12px 0;
 }
 
 .checkout-box h3 {
-  font-size: 20px;
-  color: #00e5ff;
+  font-size: 19px;
+  color: var(--accent-800);
   margin: 10px 0 18px;
 }
 
 .checkout-box input[type="number"] {
   padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
   font-size: 15px;
   outline: none;
   width: 100%;
   box-sizing: border-box;
-  transition: border 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 
 .checkout-box input[type="number"]:focus {
-  border-color: #00c6ff;
+  border-color: var(--accent-400);
 }
 
 .checkout-box input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
 }
 
 /* ── Buttons ── */
@@ -165,18 +223,18 @@
   margin-top: 16px;
   width: 100%;
   padding: 13px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   border: none;
   font-size: 15px;
   font-weight: 700;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  background: var(--accent-600);
   color: white;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .primary-btn:hover {
-  opacity: 0.9;
+  background: var(--accent-800);
   transform: translateY(-1px);
 }
 
@@ -187,25 +245,25 @@
 .checkout-box > button:not(.primary-btn) {
   margin-top: 8px;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-strong);
+  color: var(--text-secondary);
   padding: 10px 16px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.2s ease;
+  transition: background 0.15s ease;
   align-self: flex-start;
 }
 
 .checkout-box > button:not(.primary-btn):hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: white;
+  background: var(--ink-50);
+  color: var(--text-primary);
 }
 
 /* ── Loading state ── */
 .student-bg > p {
-  color: white;
-  font-size: 16px;
+  color: var(--text-secondary);
+  font-size: 15px;
   margin: auto;
   padding-top: 40px;
 }
@@ -218,11 +276,11 @@
   }
 
   .filter-row {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .filter-row input,
   .filter-row select {
-    width: 100%;
+    width: 100% !important;
   }
 }

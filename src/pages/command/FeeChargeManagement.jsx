@@ -14,8 +14,8 @@ export default function FeeChargeManagement() {
         <div className="command-tile" onClick={() => navigate("/command-centre/fee-charges/fees-annual")}
 >
           <div className="icon">📅</div>
-          <h3>Annual Fee</h3>
-          <p>April charges & readmission setup</p>
+          <h3>Additional Charges</h3>
+          <p>Admission, exam, books, uniform, etc. — any month you choose.</p>
         </div>
 
         <div className="command-tile" onClick={() => navigate("/command-centre/fee-charges/transport")}>

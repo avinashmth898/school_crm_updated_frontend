@@ -1,0 +1,23 @@
+name: Deploy frontend
+
+# Mirrors backend/.github/workflows/deploy.yml but for this repo — SSHes
+# into the same VM and asks the shared upgrade.sh (which lives in the
+# backend checkout) to pull this repo's new ref and rebuild the frontend
+# (Nginx) container.
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and upgrade frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            /opt/schoolcrm/backend/deploy/upgrade.sh frontend "${{ github.ref_name }}"

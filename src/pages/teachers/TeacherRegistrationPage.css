@@ -1,0 +1,110 @@
+/* ================= PAGE BACKGROUND ================= */
+
+.student-bg {
+  min-height: 100%;
+  background: var(--page-bg);
+  color: var(--text-primary) !important;
+  padding: 32px;
+}
+
+/* ================= CARD ================= */
+
+.profile-card {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--surface-1) !important;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+}
+
+/* ================= TITLE ================= */
+
+.profile-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-primary) !important;
+}
+
+/* ================= FORM ================= */
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ================= INPUTS & SELECT ================= */
+
+.student-form input,
+.student-form select {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+/* ================= PLACEHOLDER ================= */
+
+.student-form input::placeholder {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ================= FOCUS ================= */
+
+.student-form input:focus,
+.student-form select:focus {
+  border-color: var(--accent-400);
+}
+
+/* ================= ROW (NO OVERLAP) ================= */
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ================= BUTTON ================= */
+
+.primary-btn {
+  margin-top: 6px;
+  padding: 13px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-600);
+  font-size: 14.5px;
+  font-weight: 700;
+  border: none;
+  color: var(--text-on-accent);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.primary-btn:hover {
+  background: var(--accent-800);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .student-bg {
+    padding: 16px;
+  }
+
+  .profile-card {
+    padding: 22px 18px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

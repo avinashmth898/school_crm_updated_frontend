@@ -1,175 +1,274 @@
 .finance-page {
-  padding: 30px;
-  min-height: 100vh;
-  background:
-    linear-gradient(135deg, #0c1424, #101c36);
-  color: white;
+  padding: 28px 32px;
+  min-height: 100%;
+  background: var(--page-bg, #eef2f8);
+  color: var(--text-primary, #0f172a) !important;
 }
 
 /* HEADER */
 .finance-header {
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
 .finance-header h1 {
-  margin-bottom: 5px;
+  margin: 0 0 4px;
+  font-size: 24px;
+  color: var(--text-primary, #0f172a) !important;
 }
 
 .finance-header p {
-  opacity: 0.7;
   font-size: 13px;
+  color: var(--text-secondary, #475569) !important;
 }
 
-/* METRICS */
+/* ================= ORG OVERVIEW ================= */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.overview-card {
+  background: var(--surface-1, #ffffff) !important;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(15,23,42,0.08));
+}
+
+.overview-card span {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary, #64748b) !important;
+}
+
+.overview-card h2 {
+  margin: 8px 0 2px;
+  font-size: 30px;
+  color: var(--text-primary, #0f172a) !important;
+}
+
+.overview-note {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--text-muted, #94a3b8) !important;
+}
+
+/* ================= SECTION CARD ================= */
+.section-card {
+  background: var(--surface-1, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(15,23,42,0.08));
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 22px;
+}
+
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.section-title-row h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-primary, #0f172a) !important;
+  padding-left: 10px;
+  border-left: 3px solid var(--accent-600, #185FA5);
+}
+
+/* ================= PERIOD FILTER ================= */
+.period-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-tabs {
+  display: flex;
+  background: var(--ink-100, #f1f5f9);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.filter-tab {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #475569);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.filter-tab.active {
+  background: var(--accent-600, #185FA5);
+  color: #ffffff;
+}
+
+.period-filter input[type="date"],
+.period-filter select {
+  padding: 7px 10px;
+  font-size: 12.5px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #e2e8f0);
+  background: var(--surface-1, #ffffff);
+  color: var(--text-primary, #0f172a);
+}
+
+.period-filter select option {
+  color: #0f172a;
+}
+
+/* ================= METRICS (collection cards) ================= */
 .metrics-grid {
   display: grid;
-  grid-template-columns:
-    repeat(auto-fit, minmax(220px, 1fr));
-
-  gap: 18px;
-
-  margin-bottom: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
 }
 
-/* CARD */
 .metric-card {
-  background: rgba(255,255,255,0.05);
-
-  border-radius: 16px;
-
-  padding: 22px;
-
-  backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255,255,255,0.05);
-
-  transition: 0.25s;
-}
-
-.metric-card:hover {
-  transform: translateY(-3px);
+  background: var(--ink-50, #f8fafc);
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid var(--border, #e2e8f0);
 }
 
 .metric-card span {
-  font-size: 13px;
-  opacity: 0.7;
+  font-size: 12px;
+  color: var(--text-secondary, #475569) !important;
 }
 
 .metric-card h2 {
-  margin-top: 12px;
-  font-size: 28px;
+  margin-top: 10px;
+  font-size: 22px;
+  color: var(--text-primary, #0f172a) !important;
 }
 
-/* TOTAL CARD */
 .metric-card.total {
-  background:
-    linear-gradient(135deg, #00c853, #00e676);
-
-  color: black;
+  background: var(--teal-50, #E1F5EE);
+  border-color: var(--teal-100, #9FE1CB);
 }
 
-/* TABLE CARD */
-.transaction-card {
-  background: rgba(255,255,255,0.05);
-
-  border-radius: 16px;
-
-  overflow: hidden;
-
-  border: 1px solid rgba(255,255,255,0.05);
+.metric-card.total span,
+.metric-card.total h2 {
+  color: var(--teal-800, #085041) !important;
 }
 
-/* HEADER */
-.table-header {
-  padding: 18px 20px;
-
-  border-bottom:
-    1px solid rgba(255,255,255,0.05);
+/* ================= REPORT TABLE (flat, readable) ================= */
+.report-table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border, #e2e8f0);
 }
 
-/* TABLE */
-.transaction-table {
+.report-table {
   width: 100%;
-}
-
-/* HEAD */
-.table-head {
-  display: grid;
-
-  grid-template-columns:
-    1.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
-
-  padding: 14px 20px;
-
-  background: rgba(255,255,255,0.04);
-
+  border-collapse: collapse;
   font-size: 13px;
+}
 
+.report-table thead th {
+  background: var(--ink-900, #10131a) !important;
+  color: var(--text-on-accent, #ffffff) !important;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 11px 14px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.report-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  background: var(--surface-1, #ffffff) !important;
+  color: var(--text-primary, #111827) !important;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.report-table tbody tr:nth-child(even) td {
+  background: var(--ink-50, #eceff3) !important;
+}
+
+.report-table tbody tr:hover td {
+  background: var(--accent-50, #dbe6f7) !important;
+}
+
+.col-left   { text-align: left !important; }
+.col-num    { text-align: right !important; }
+.col-center { text-align: center !important; }
+
+thead .col-left   { text-align: left !important; }
+thead .col-center { text-align: center !important; }
+
+.totals-row td {
+  background: var(--border-strong, #d9dee6) !important;
+  color: var(--text-primary, #111827) !important;
+  font-weight: 800 !important;
+  border-top: 2px solid var(--ink-900, #10131a);
+  border-bottom: none;
+}
+
+.student-name {
   font-weight: 600;
+  color: var(--text-primary, #111827) !important;
 }
 
-/* ROW */
-.table-row {
-  display: grid;
-
-  grid-template-columns:
-    1.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
-
-  padding: 15px 20px;
-
-  border-top:
-    1px solid rgba(255,255,255,0.05);
-
-  align-items: center;
-
-  transition: 0.2s;
-}
-
-.table-row:hover {
-  background: rgba(255,255,255,0.03);
-}
-
-/* RECEIPT */
-.receipt {
-  color: #00e676;
-  font-weight: 600;
-}
-
-/* MODE */
-.mode {
-  width: fit-content;
-
-  padding: 5px 10px;
-
-  border-radius: 20px;
-
+.student-meta {
   font-size: 11px;
-
-  font-weight: 600;
+  color: var(--text-secondary, #64748b) !important;
 }
 
-.mode.cash {
-  background: rgba(255,193,7,0.15);
-  color: #ffc107;
+.receipt-code {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-primary, #111827) !important;
+  background: var(--ink-200, #e2e8f0) !important;
+  border: 1px solid var(--border-strong, #cbd5e1);
+  border-radius: 4px;
+  padding: 2px 6px;
 }
 
-.mode.upi {
-  background: rgba(0,255,150,0.15);
-  color: #00e676;
+/* MODE PILL — bold colored text, no background, matches the rest of the app */
+.mode-pill {
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
-.mode.card {
-  background: rgba(0,150,255,0.15);
-  color: #42a5f5;
+.mode-pill.cash  { color: #b45309 !important; }
+.mode-pill.upi   { color: #15803d !important; }
+.mode-pill.card  { color: #1d4ed8 !important; }
+.mode-pill.cheque { color: #dc2626 !important; }
+
+.empty-note {
+  text-align: center !important;
+  padding: 18px !important;
+  color: var(--text-muted, #94a3b8) !important;
+  background: var(--surface-1, #ffffff) !important;
 }
 
-.mode.cheque {
-  background: rgba(255,82,82,0.15);
-  color: #ff5252;
-}
-
-/* TIME */
-.time {
-  opacity: 0.7;
-  font-size: 12px;
+/* ================= RESPONSIVE ================= */
+@media (max-width: 720px) {
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

@@ -1,131 +1,421 @@
 .student-bg {
-  min-height: 100vh;
-  padding: 40px;
-  background: linear-gradient(135deg, #0c1424, #101c36);
-  color: white;
+  min-height: 100%;
+  background: var(--page-bg);
+  color: var(--text-primary) !important;
 }
 
 /* CONTAINER */
 .dashboard-container {
   width: 100%;
-    padding: 20px 40px;
+  padding: 28px 32px;
+}
+
+/* CARD (registration-style card, kept consistent with other student pages) */
+.profile-card {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--surface-1) !important;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  color: var(--text-primary) !important;
 }
 
 /* HERO */
 .student-hero {
-  background: rgba(255,255,255,0.05);
-  border-radius: 14px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
   padding: 20px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 /* NAME */
 .student-hero h1 {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary) !important;
 }
 
 .student-hero p {
   font-size: 13px;
-  opacity: 0.6;
+  color: var(--text-secondary) !important;
 }
 
 /* CLASS BADGE */
 .class-badge {
-  background: #00c853;
+  background: var(--teal-50);
+  color: var(--teal-800);
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   font-size: 12px;
-  font-weight: 600;
-  box-shadow: 0 0 10px rgba(0,255,150,0.4);
+  font-weight: 700;
+  border: 1px solid var(--teal-100);
+}
+
+/* STATUS BADGE */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+}
+.status-badge.status-active {
+  background: var(--teal-50);
+  color: var(--teal-800);
+  border: 1px solid var(--teal-100);
+}
+.status-badge.status-withdrawn {
+  background: var(--red-50);
+  color: var(--red-600);
+  border: 1px solid var(--red-100);
+}
+.status-badge.status-graduated {
+  background: var(--accent-50);
+  color: var(--accent-800);
+  border: 1px solid var(--accent-100);
 }
 
 /* BUTTON ROW */
 .actions-row {
   display: flex;
-  gap: 16px;
-  justify-content: flex-center;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 }
 
 /* BUTTON */
 .actions-row button {
   padding: 10px 16px;
-  border-radius: 10px;
-  border: none;
-  background: linear-gradient(135deg, #1e88e5, #42a5f5);
-  color: white;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-1);
+  color: var(--text-primary);
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .actions-row button:hover {
-  transform: translateY(-2px);
+  background: var(--accent-50);
+  transform: translateY(-1px);
+}
+
+/* Small action buttons in the hero (Edit / Send back / Promote / Withdraw etc.) */
+.student-hero button {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.student-hero button:hover {
+  background: var(--accent-50);
 }
 
 /* CARDS GRID */
 .info-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 16px;
 }
 
 /* CARD */
 .info-card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  padding: 16px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
 }
 
 /* TEXT */
 .info-card h4 {
-  font-size: 13px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-secondary) !important;
   margin-bottom: 10px;
 }
 
 .info-card p {
-  font-size: 13px;
+  font-size: 13.5px;
+  color: var(--text-primary) !important;
 }
 
 /* ATTENDANCE */
 .progress-bar {
   height: 8px;
-  background: #333;
+  background: var(--ink-100);
   border-radius: 6px;
   margin: 6px 0;
 }
 
 .progress-bar div {
   height: 100%;
-  background: #00c853;
+  background: var(--teal-400);
+  border-radius: 6px;
 }
 
 /* PRINT */
 .admission-wrapper {
   max-width: 850px;
   margin: auto;
+  padding: 28px 32px;
 }
 
 .admission-card {
   background: white;
   color: black;
-  padding: 25px;
-  border-radius: 10px;
+  padding: 30px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised);
 }
 
 .print-bar {
   text-align: right;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .icon-btn {
-  background: #1c2331;
-  color: white;
-  border-radius: 6px;
-  padding: 6px 10px;
+  background: var(--accent-600);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--accent-800);
+}
+
+/* ===== EXAM TILE ===== */
+.exam-tile {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* HOVER EFFECT */
+.exam-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-200);
+  box-shadow: var(--shadow-raised);
+}
+
+/* CONTENT */
+.tile-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ICON */
+.tile-icon {
+  font-size: 22px;
+  background: var(--accent-50);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+}
+
+/* TEXT */
+.exam-tile h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  margin-bottom: 4px;
+}
+
+.exam-tile p {
+  font-size: 12px;
+  color: var(--text-secondary) !important;
+}
+
+/* ARROW */
+.tile-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--text-muted);
+  transition: 0.2s;
+}
+
+.exam-tile:hover .tile-arrow {
+  transform: translate(3px, -50%);
+  color: var(--accent-600);
+}
+
+/* ===== IDENTITY CARD ===== */
+.identity-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.identity-grid label {
+  font-size: 11px;
+  color: var(--text-muted) !important;
+}
+
+.identity-grid p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary) !important;
+}
+
+/* ===== CONSENT CARD ===== */
+.consent-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* CHECKBOX STYLE */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-primary) !important;
+  transition: 0.15s;
+}
+
+.checkbox-container:hover {
+  color: var(--accent-800) !important;
+}
+
+/* HIDE DEFAULT */
+.checkbox-container input {
+  display: none;
+}
+
+/* CUSTOM BOX */
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: var(--ink-100);
+  border: 1px solid var(--border-strong);
+  position: relative;
+  flex-shrink: 0;
+  transition: 0.15s;
+}
+
+/* CHECKED STATE */
+.checkbox-container input:checked + .checkmark {
+  background: var(--teal-400);
+  border-color: var(--teal-400);
+}
+
+/* TICK */
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked + .checkmark::after {
+  display: block;
+  left: 6px;
+  top: 2px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ===== EMERGENCY CONTACT ===== */
+.emergency-box {
+  background: var(--red-50);
+  border-left: 3px solid var(--red-400);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 10px 12px;
+}
+
+.emergency-number {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--red-600) !important;
+  margin-top: 4px;
+}
+
+/* ===== ADMISSION CONFIRMATION TILE ===== */
+.admission-confirmation-tile {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admission-confirmation-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-200);
+  box-shadow: var(--shadow-raised);
+}
+
+/* ICON STYLE */
+.doc-icon {
+  background: var(--accent-50);
+}
+
+/* TEXT */
+.tile-text h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: var(--text-primary) !important;
+}
+
+.tile-text p {
+  font-size: 12px;
+  color: var(--text-secondary) !important;
+}
+
+/* Highlight clickable tiles (exam / fee / admission) */
+.info-card.exam-tile,
+.info-card.admission-confirmation-tile {
+  border: 1px solid var(--teal-100);
+  background: var(--teal-50);
+}
+
+/* Hover effect (makes it clearly interactive) */
+.info-card.exam-tile:hover,
+.info-card.admission-confirmation-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-raised);
+  background: var(--surface-1);
+}
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+
+  .profile-card {
+    padding: 22px 18px;
+  }
+
+  .student-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
 }

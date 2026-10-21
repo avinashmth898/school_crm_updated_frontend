@@ -1,0 +1,134 @@
+.lic-page {
+  max-width: 720px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.lic-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 20px;
+}
+
+.lic-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  margin-bottom: 12px;
+}
+
+.lic-badge.ACTIVE { background: var(--teal-50); color: var(--teal-800); }
+.lic-badge.TRIAL { background: var(--accent-50); color: var(--accent-800); }
+.lic-badge.GRACE { background: var(--amber-50); color: var(--amber-600); }
+.lic-badge.READONLY { background: var(--red-50); color: var(--red-600); }
+
+.lic-message {
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.lic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.lic-grid div label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.lic-grid div span {
+  font-family: monospace;
+  word-break: break-all;
+  color: var(--text-primary);
+}
+
+.lic-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 0;
+}
+
+.lic-upload textarea {
+  width: 100%;
+  min-height: 90px;
+  font-family: monospace;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  resize: vertical;
+  box-sizing: border-box;
+  background: var(--surface-1);
+  color: var(--text-primary);
+}
+
+.lic-upload input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.lic-upload button {
+  margin-top: 10px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent-600);
+  color: var(--text-on-accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lic-upload button:disabled {
+  background: var(--border-strong);
+  cursor: not-allowed;
+}
+
+.lic-upload-result {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.lic-upload-result.success { background: var(--teal-50); color: var(--teal-800); }
+.lic-upload-result.error { background: var(--red-50); color: var(--red-600); }
+
+.lic-online {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.lic-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .lic-page {
+    margin: 12px auto;
+    padding: 0 10px;
+  }
+
+  .lic-card {
+    padding: 16px;
+  }
+
+  .lic-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}

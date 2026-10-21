@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { login } from "../../services/authService";
-import { setToken } from "../../auth/authStorage";
+import { setSession } from "../../auth/authStorage";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../../ui/ToastContext";
 import "./Login.css";
 
 const LoginContainer = () => {
+  const toast = useToast();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,10 +18,18 @@ const LoginContainer = () => {
 
     try {
       const res = await login(username, password);
-      setToken(res.token);
+      setSession(res);
+      try {
+        new Audio("/login-chime.mp3").play().catch(() => {});
+      } catch {
+        // ignore — audio is a nice-to-have, never block login on it
+      }
       navigate("/");
     } catch (err) {
-      alert("Invalid credentials");
+      // Show the backend's actual reason (wrong password, device pending
+      // approval, account disabled, etc.) instead of a generic message —
+      // these mean very different things to the person logging in.
+      toast.error(err.response?.data?.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -28,7 +38,12 @@ const LoginContainer = () => {
   return (
     <div className="login-bg">
       <div className="login-card">
-        <h2 className="title">School name goes here</h2>
+        <img
+          src="/ednuvo_wordmark.png"
+          srcSet="/ednuvo_wordmark.png 1x, /ednuvo_wordmark@2x.png 2x"
+          alt="EdNuvo"
+          style={{ height: 40, display: "block", margin: "0 auto 12px" }}
+        />
 
         <p className="subtitle">Admin Portal</p>
 

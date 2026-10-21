@@ -1,8 +1,16 @@
 import "./Defaulters.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import apiClient from "../../services/apiClient";
+import { useLanguage } from "../../i18n/LanguageContext";
+import EmptyState from "../../ui/EmptyState";
+import Icon from "../../ui/icons";
+import { useToast } from "../../ui/ToastContext";
 
 export default function Defaulters() {
+  const { t } = useLanguage();
+  const navigate = useNavigate();
+  const toast = useToast();
   const [students, setStudents] = useState([]);
   const [classFilter, setClassFilter] = useState("");
   const [expanded, setExpanded] = useState(null);
@@ -31,6 +39,7 @@ export default function Defaulters() {
 
     } catch (err) {
       console.error(err);
+      toast.error(err.response?.data?.message || "Failed to load defaulters list");
     } finally {
       setLoading(false);
     }
@@ -51,7 +60,7 @@ export default function Defaulters() {
     <div className="defaulter-page">
       <div className="defaulter-card">
 
-        <h2>🚨 Fee Defaulters</h2>
+        <h2>🚨 {t("defaulters.heading")}</h2>
 
         {/* 🔍 Filter */}
         <div className="filter-row">
@@ -59,7 +68,7 @@ export default function Defaulters() {
             value={classFilter}
             onChange={(e) => handleFilterChange(e.target.value)}
           >
-            <option value="">All Classes</option>
+            <option value="">{t("common.allClasses")}</option>
             {classOrder.map(cls => (
               <option key={cls}>{cls}</option>
             ))}
@@ -67,7 +76,7 @@ export default function Defaulters() {
         </div>
 
         {/* ⏳ Loading */}
-        {loading && <p className="loading">Loading defaulters...</p>}
+        {loading && <p className="loading">{t("defaulters.loading")}</p>}
 
         {/* 📋 Table */}
         {!loading && students.length > 0 && (
@@ -75,11 +84,12 @@ export default function Defaulters() {
             <table className="defaulter-table">
               <thead>
                 <tr>
-                  <th>Reg No</th>
-                  <th>Name</th>
-                  <th>Class</th>
-                  <th>Mobile</th>
-                  <th>Due Months</th>
+                  <th>{t("defaulters.regNo")}</th>
+                  <th>{t("defaulters.name")}</th>
+                  <th>{t("defaulters.class")}</th>
+                  <th>{t("defaulters.mobile")}</th>
+                  <th>{t("defaulters.dueMonths")}</th>
+                  <th>Action</th>
                 </tr>
               </thead>
 
@@ -97,17 +107,28 @@ export default function Defaulters() {
                       <td>{s.currentClass}</td>
                       <td>{s.mobileNumber}</td>
                       <td className="due">
-                        🔴 {s.dueCount} months
+                        🔴 {s.dueCount} {t("defaulters.months")}
+                      </td>
+                      <td>
+                        <button
+                          className="defaulter-pay-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/students/${s.registrationNumber}/pay-fee`);
+                          }}
+                        >
+                          💳 Pay
+                        </button>
                       </td>
                     </tr>
 
                     {/* EXPANDED ROW */}
                     {expanded === s.registrationNumber && (
                       <tr className="expanded-row">
-                        <td colSpan="5">
+                        <td colSpan="6">
                           <div className="expanded-content">
 
-                            <p><strong>Due Months:</strong></p>
+                            <p><strong>{t("defaulters.dueMonths")}:</strong></p>
 
                             <div className="months-list">
                               {s.dueMonths.map((m, i) => (
@@ -128,9 +149,9 @@ export default function Defaulters() {
           </div>
         )}
 
-        {/* ❌ Empty */}
+        {/* Empty */}
         {!loading && students.length === 0 && (
-          <p className="empty">No defaulters found.</p>
+          <EmptyState icon={Icon.ClipboardList} message={t("defaulters.empty")} />
         )}
 
       </div>

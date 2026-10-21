@@ -1,60 +1,76 @@
 .command-bg {
-  min-height: 100vh;
-  background: linear-gradient(120deg, #020617, #0f172a);
-  padding: 60px 40px;
-  color: white;
+  min-height: 100%;
+  background: var(--page-bg);
+  padding: 32px;
+  color: var(--text-primary) !important;
   text-align: center;
 }
 
 .command-title {
-  font-size: 34px;
+  font-size: 26px;
+  font-weight: 700;
   margin-bottom: 6px;
+  color: var(--text-primary) !important;
 }
 
 .command-subtitle {
-  opacity: 0.7;
-  margin-bottom: 40px;
+  color: var(--text-secondary) !important;
+  margin-bottom: 32px;
 }
 
 .command-tiles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
+  gap: 18px;
   max-width: 1000px;
   margin: auto;
 }
 
 .command-tile {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  padding: 26px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  padding: 24px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  border: 1px solid rgba(255,255,255,0.12);
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
 .command-tile:hover {
-  transform: translateY(-6px);
-  border-color: #38bdf8;
+  transform: translateY(-4px);
+  border-color: var(--accent-200);
+  box-shadow: var(--shadow-raised);
 }
 
 .command-tile .icon {
-  font-size: 36px;
+  font-size: 32px;
   margin-bottom: 10px;
 }
 
 .command-tile h3 {
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 700;
   margin-bottom: 4px;
+  color: var(--text-primary);
 }
 
 .command-tile p {
-  font-size: 13px;
-  opacity: 0.7;
+  font-size: 12.5px;
+  color: var(--text-secondary);
 }
 
 .command-tile.disabled {
-  opacity: 0.3;
+  opacity: 0.4;
   cursor: default;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .command-bg {
+    padding: 16px;
+  }
+
+  .command-tile {
+    padding: 18px;
+  }
 }

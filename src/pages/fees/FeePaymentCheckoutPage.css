@@ -1,190 +1,851 @@
-/* PAGE WRAPPER */
+/* ================= PAGE WRAPPER — fixed to the viewport, no page scroll ================= */
 .payfee-page {
   width: 100%;
-  min-height: 100vh;
-  padding: 30px 20px;
-  background: linear-gradient(135deg, #0f172a, #020617);
+  height: calc(100vh - var(--shell-topbar-h));
+  padding: 16px 20px;
+  background: var(--page-bg);
   box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
 }
 
-/* CONTENT CONTAINER */
-.payfee-container {
+.payfee-shell {
   width: 100%;
-  max-width: 100%;
-  margin: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding-bottom: 60px;
+  gap: 14px;
   box-sizing: border-box;
+  min-height: 0;
 }
 
-/* FORCE UPPER SECTION FULL WIDTH */
-.payfee-content {
-  width: 100%;
+/* ---- HEADER: identity + live totals, always visible, fixed height ---- */
+.payfee-header {
+  flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 18px;
-  box-sizing: border-box;
-}
-
-/* CARD */
-.card {
-  width: 100%;
-  background: #0d1b2a;
-  color: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-sizing: border-box;
-}
-
-/* SUMMARY */
-.summary {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 16px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
   flex-wrap: wrap;
-  gap: 10px;
 }
 
-/* MONTH GRID */
-.months-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 15px;
+.payfee-header-student {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.payfee-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-100);
+  color: var(--accent-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.payfee-header-student h2 {
+  margin: 0;
+  font-size: 15.5px;
+  color: var(--text-primary);
+}
+
+.payfee-header-student p {
+  margin: 1px 0 0;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.payfee-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: right;
+}
+
+.payfee-stat label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.payfee-stat span {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.payfee-stat-payable span {
+  color: var(--teal-600);
+}
+
+/* ---- BODY: months (left) + sidebar (right), fills remaining height ---- */
+.payfee-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  gap: 16px;
+}
+
+.payfee-months-panel {
+  flex: 1 1 50%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.payfee-panel-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.payfee-panel-head h3 {
+  margin: 0;
+  font-size: 13.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+}
+
+.payfee-quick-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.payfee-sidebar {
+  flex: 1 1 50%;
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+/* SIDEBAR CARD */
+.sidebar-card {
   width: 100%;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  color: var(--text-primary);
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  flex: 0 0 auto;
 }
 
-/* MONTH CARD */
+.sidebar-card h3 {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+/* GENERIC SMALL CHIP BUTTON — used for quick actions + adjustment toggles */
+.chip-btn {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--ink-50);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.chip-btn:hover {
+  background: var(--accent-50);
+  border-color: var(--accent-200);
+}
+
+.chip-btn-ghost {
+  background: transparent;
+}
+
+/* MONTH GRID — fills the panel's remaining height, wraps and scrolls
+   internally only as a safety net (normal academic-year counts fit). */
+.months-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  align-content: start;
+  gap: 14px 10px;
+  width: 100%;
+  /* Room for the checkmark badge (which sits partly above the tile) and
+     for the tile's hover/selected lift, so the top row never gets its
+     badge or outline clipped by this panel's own scroll edge. */
+  padding: 12px 4px 4px;
+}
+
+/* MONTH CARD — compact, animated selection state */
 .month-card {
-  background: #1b263b;
-  padding: 15px;
-  border-radius: 10px;
+  position: relative;
+  background: var(--ink-50);
+  border: 1px solid var(--border);
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   text-align: center;
-  transition: all 0.2s ease;
-  color: white;
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+  color: var(--text-primary);
 }
 
 .month-card h4 {
-  margin: 0 0 6px;
-  font-size: 14px;
+  margin: 0 0 4px;
+  font-size: 12.5px;
+  font-weight: 700;
 }
 
 .month-card p {
-  margin: 0 0 4px;
-  font-size: 13px;
-  opacity: 0.8;
+  margin: 0 0 3px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
 }
 
 .month-card span {
-  font-size: 11px;
-  opacity: 0.6;
+  font-size: 9.5px;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
 .month-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+  border-color: var(--accent-200);
 }
 
-/* PAID */
+/* Status colored as a translucent tint over the card's normal surface
+   (not a solid fill) so the card still reads as part of the UI, not a
+   flat color block — just enough of a signal for whoever is at the
+   counter to tell paid/partial/due apart at a glance before even
+   reading the text. Falls back to the old solid tint on browsers
+   without color-mix() support (still correct, just not translucent). */
 .month-card.paid {
-  background: #2e7d32;
-  cursor: pointer;
+  background: var(--teal-50);
+  background: color-mix(in srgb, var(--teal-600) 18%, transparent);
+  border-color: var(--teal-100);
 }
 
-.month-card.paid:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 10px rgba(46,125,50,0.6);
+.month-card.partial {
+  background: var(--amber-50);
+  background: color-mix(in srgb, var(--amber-400) 20%, transparent);
+  border-color: var(--amber-100);
 }
 
-/* SELECTED */
+.month-card.due {
+  background: var(--red-50);
+  background: color-mix(in srgb, var(--red-400) 16%, transparent);
+  border-color: var(--red-100);
+}
+
 .month-card.selected {
-  border: 2px solid #00e5ff;
-  box-shadow: 0 0 10px rgba(0,229,255,0.4);
+  border: 2px solid var(--accent-400);
+  box-shadow: 0 0 0 3px var(--accent-50);
+  transform: translateY(-2px);
 }
 
-/* PAYMENT MODE SELECT */
-.card select {
-  width: 100%;
-  padding: 12px 14px;
-  margin-top: 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: #1b263b;
-  color: white;
-  font-size: 15px;
-  outline: none;
-  cursor: pointer;
-  box-sizing: border-box;
+.month-check {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-600);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
 }
 
-.card select option {
-  background: #0d1b2a;
+/* Advance-payment months (beyond the current month) get a small badge so
+   staff know they're optionally pre-paying, not catching up on a due month. */
+.month-advance-badge {
+  position: absolute;
+  top: -7px;
+  left: 6px;
+  background: var(--accent-100);
+  color: var(--accent-700, var(--accent-600));
+  font-size: 8.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-200);
+}
+
+/* Shown once the automatic ₹100 late fine (due on the 10th) has been
+   applied to that month's ledger total. */
+.month-fine-badge {
+  display: block;
+  margin-top: 2px;
+  font-size: 8.5px !important;
+  font-weight: 800 !important;
+  color: var(--red-600) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
 }
 
 /* PAY BUTTON */
 .pay-btn {
+  flex: 0 0 auto;
   width: 100%;
-  padding: 18px;
-  font-size: 18px;
+  padding: 14px;
+  font-size: 15px;
   font-weight: 700;
-  background: #00c853;
+  background: var(--teal-600);
   border: none;
   color: white;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.2s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
   box-sizing: border-box;
 }
 
 .pay-btn:hover {
-  transform: scale(1.02);
-  opacity: 0.92;
+  background: var(--teal-800);
+  transform: translateY(-1px);
 }
 
 .pay-btn:active {
   transform: scale(0.98);
 }
 
-/* RECEIPT */
-.receipt {
-  background: white;
-  color: black;
-  padding: 30px;
-  margin-top: 20px;
-  border-radius: 10px;
-  width: 100%;
+/* PARTIAL PAYMENT — light yellow theme, per the "make partial payment
+   visually distinct" requirement. */
+.pay-btn-partial {
+  background: #f5c518;
+  color: #5c4400;
+}
+
+.pay-btn-partial:hover {
+  background: #e0b000;
+}
+
+.pay-btn-overpaid {
+  background: var(--red-100);
+  color: var(--red-600);
+  cursor: not-allowed;
+}
+
+.pay-btn-overpaid:hover {
+  background: var(--red-100);
+}
+
+/* SUMMARY — plain label/value rows, no cards-within-cards */
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+}
+
+.summary-line b {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-line-muted {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.summary-line-total {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.summary-line-total b {
+  font-size: 16px;
+  color: var(--teal-600);
+}
+
+/* Fine / Discount / Additional Charge — optional, so all three sit in one
+   row with their own compact box, always available, no reveal step. */
+.inline-adjustments-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.inline-adjustments-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.inline-adjustments-row input,
+.inline-adjustments-row select {
+  padding: 7px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-size: 12.5px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* Amount to Pay — the one field the user actually types into. Paying less
+   than the full payable amount is read as a partial payment automatically,
+   signalled here with the same light-yellow treatment used elsewhere for
+   partial payments. */
+.amount-to-pay-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--ink-50);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.amount-to-pay-box input {
+  padding: 9px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 700;
   box-sizing: border-box;
 }
 
-.receipt table {
+.amount-to-pay-box.is-partial {
+  background: #fdf6d8;
+  border-color: #f5c518;
+  color: #5c4400;
+}
+
+.amount-to-pay-box.is-partial input {
+  border-color: #e0b000;
+}
+
+.partial-remaining {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  color: #5c4400;
+}
+
+/* Overpaying isn't an error — it rolls forward as an advance toward the
+   next month(s) — so this gets an informational accent tint, not red.
+   Red is reserved for the rarer case where the extra genuinely doesn't
+   fit anywhere yet (.overpaid-warning below). */
+.amount-to-pay-box.is-overpaid {
+  background: var(--accent-50);
+  border-color: var(--accent-400);
+  color: var(--accent-800, var(--accent-600));
+}
+
+.amount-to-pay-box.is-overpaid input {
+  border-color: var(--accent-400);
+}
+
+.overpaid-note {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  color: var(--accent-800, var(--accent-600));
+}
+
+.overpaid-warning {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--red-600);
+}
+
+/* PAYMENT MODE — plain select, simplest possible control */
+.simple-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-size: 14px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* RECEIPT OVERLAY — the receipt opens on top of the dashboard instead of
+   pushing it out of view, so the payment screen never needs to scroll. */
+.receipt-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.receipt-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.receipt-close:hover {
+  background: #eef2f7;
+}
+
+/* RECEIPT breakdown summary (task: full fee breakdown on the receipt) */
+.receipt-breakdown-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.receipt-breakdown-summary div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.receipt-breakdown-summary label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #64748b;
+}
+
+.receipt-breakdown-summary span {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ================= RECEIPT — standard printable document ================= */
+/* Compact by design: the whole thing is sized to comfortably sit within the
+   top half of an A4 sheet, so printing/exporting never spills a mostly-blank
+   second page. */
+.receipt {
+  position: relative;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  padding: 22px 26px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  width: 100%;
+  max-width: 620px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  margin: 0 auto;
+  box-sizing: border-box;
+  box-shadow: var(--shadow-raised);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Thin accent stripe across the top — a small professional touch */
+.receipt::before {
+  content: "";
+  display: block;
+  height: 4px;
+  margin: -22px -26px 16px;
+  background: linear-gradient(to right, #0f172a, #334155 60%, #94a3b8);
+}
+
+/* Letterhead — centered, single-line address/phone, kicker badge below */
+.receipt-letterhead {
+  text-align: center;
+}
+
+.receipt-school-name {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #0f172a !important;
+  margin: 0 0 3px;
+}
+
+.receipt-school-address {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: #64748b !important;
+  margin: 0 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.receipt-badge {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff !important;
+  background: #10131a !important;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill, 999px);
+  white-space: nowrap;
+}
+
+.receipt-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #cbd5e1 15%, #cbd5e1 85%, transparent);
+  margin: 12px 0 12px;
+}
+
+/* Unified details panel — payment meta + student info share one bordered
+   card so the two rows read as a single consistent block instead of two
+   mismatched sections. */
+.receipt-details {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 12px;
+}
+
+.receipt-details-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 8px 0;
+}
+
+/* Meta row: receipt no / date / mode */
+.receipt-meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.receipt-meta-row div,
+.receipt-student-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.receipt-meta-row label,
+.receipt-student-grid label {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8 !important;
+}
+
+.receipt-meta-row span,
+.receipt-student-grid span {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #0f172a !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Student detail row — 5 fields across a single line now that the
+   receipt spans the full page width. */
+.receipt-student-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px 14px;
+}
+
+/* Itemized table */
+.receipt-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 15px 0;
-}
-
-.receipt table th,
-.receipt table td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-  font-size: 14px;
-}
-
-.receipt button {
-  margin-top: 16px;
-  padding: 10px 20px;
-  background: #0072ff;
-  color: white;
-  border: none;
+  margin: 0 0 10px;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
+  overflow: hidden;
+}
+
+.receipt-table th {
+  background: #10131a !important;
+  color: #ffffff !important;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 7px 12px;
+  text-align: left;
+}
+
+.receipt-table td {
+  padding: 7px 12px;
+  font-size: 12.5px;
+  color: #111827 !important;
+  border-bottom: 1px solid #eef2f7;
+  background: #ffffff !important;
+}
+
+.receipt-table tbody tr:nth-child(even) td {
+  background: #f8fafc !important;
+}
+
+.receipt-table .col-sr { width: 32px; }
+.receipt-table .col-money { text-align: right !important; font-variant-numeric: tabular-nums; }
+.receipt-table th.col-money { text-align: right !important; }
+
+.receipt-total-row td {
+  background: #eef2f7 !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  font-size: 13px;
+  border-top: 2px solid #10131a;
+  border-bottom: none;
+}
+
+/* Amount in words */
+.receipt-words {
+  font-size: 11.5px;
+  color: #334155 !important;
+  margin: 0 0 14px;
+}
+
+.receipt-words label {
+  font-weight: 700;
+  color: #0f172a !important;
+  margin-right: 4px;
+}
+
+/* Signature row */
+.receipt-signature-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 22px;
+}
+
+.signature-box {
+  flex: 1;
+  text-align: center;
+}
+
+.signature-line {
+  border-top: 1px solid #94a3b8;
+  margin-bottom: 4px;
+}
+
+.signature-box span {
+  font-size: 10.5px;
+  color: #64748b !important;
+}
+
+.receipt-footnote {
+  margin-top: 12px;
+  font-size: 9.5px;
+  font-style: italic;
+  color: #94a3b8 !important;
+  text-align: center;
+}
+
+/* Action buttons (hidden on print) */
+.receipt-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 /* PRINT */
 @media print {
+  @page {
+    size: A4;
+    /* top right bottom left — a little tighter on the left so the receipt
+       stretches sideways rather than sitting centered with big gutters */
+    margin: 12mm 12mm 12mm 8mm;
+  }
+
+  html, body {
+    height: auto !important;
+  }
+
+  /* Collapse the working UI out of layout entirely (not just hidden) so
+     it can't leave behind a blank trailing page. */
+  .no-print {
+    display: none !important;
+  }
+
+  .payfee-page,
+  .payfee-shell,
+  .receipt-overlay {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    position: static !important;
+    display: block !important;
+  }
+
   body * { visibility: hidden; }
   .receipt.printable,
   .receipt.printable * { visibility: visible; }
@@ -193,12 +854,81 @@
     left: 0;
     top: 0;
     width: 100%;
+    max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .receipt-table th {
+    background: #0f172a !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .receipt-badge {
+    background: #10131a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .receipt::before {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
 
-/* RESPONSIVE */
 @media (max-width: 600px) {
-  .payfee-page { padding: 20px 12px; }
-  .months-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-  .pay-btn { font-size: 16px; padding: 14px; }
+  .receipt-meta-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .receipt-student-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .receipt-school-address {
+    white-space: normal;
+  }
+}
+
+/* RESPONSIVE — below this width the two-column no-scroll dashboard can't
+   fit a full academic year of months plus the sidebar at a usable size,
+   so the layout stacks and the page scrolls normally instead. */
+@media (max-width: 900px) {
+  .payfee-page {
+    height: auto;
+    min-height: calc(100vh - var(--shell-topbar-h));
+    overflow: visible;
+    padding: 16px 12px;
+  }
+
+  .payfee-shell {
+    height: auto;
+  }
+
+  .payfee-body {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .payfee-months-panel {
+    max-height: 50vh;
+  }
+
+  .payfee-sidebar {
+    max-width: 100%;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .payfee-header { padding: 10px 14px; }
+  .payfee-header-stats { gap: 12px; }
+  .months-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+  .pay-btn { font-size: 15px; padding: 14px; }
+  .mode-segment { grid-template-columns: repeat(2, 1fr); }
 }

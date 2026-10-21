@@ -1,38 +1,44 @@
-import axios from "axios";
-import { getToken } from "../auth/authStorage";
+import apiClient from "./apiClient";
 
-export const registerStudent = (data) => {
-  return axios.post(
-    "https://edschoolak.onrender.com/api/students",
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-        "Content-Type": "application/json"
-      }
-    }
-  );
+/**
+ * FETCH ALL STUDENTS
+ * We export it as 'fetchStudents' AND 'getAllStudents'
+ * so all your components work without errors.
+ *
+ * status: "ACTIVE" | "WITHDRAWN" | "GRADUATED" | "ALL" (defaults to ACTIVE
+ * so withdrawn/graduated students don't clutter the day-to-day list).
+ */
+export const fetchStudents = (status = "ACTIVE") => {
+  return apiClient.get("/students", { params: { status } });
 };
 
+// Add this line to satisfy StudentSearchPage.jsx
+export const getAllStudents = fetchStudents;
+
+/**
+ * GET SINGLE STUDENT PROFILE
+ */
 export const getStudentProfile = (regNo) => {
-  return axios.get(
-    `http://localhost:8080/api/students/${regNo}`,
-    {
-      headers: {
-        Authorization: `Bearer ${getToken()}`
-      }
-    }
-  );
+  return apiClient.get(`/students/${regNo}`);
 };
 
-/* ✅ THIS WAS MISSING */
-export const getAllStudents = () => {
-  return axios.get(
-    "http://localhost:8080/api/students",
-    {
-      headers: {
-        Authorization: `Bearer ${getToken()}`
-      }
-    }
-  );
+/**
+ * REGISTER A NEW STUDENT
+ */
+export const registerStudent = (data) => {
+  return apiClient.post("/students", data);
+};
+
+/**
+ * EDIT AN EXISTING STUDENT
+ */
+export const updateStudent = (regNo, data) => {
+  return apiClient.put(`/students/${regNo}`, data);
+};
+
+/**
+ * WITHDRAW / GRADUATE / REACTIVATE
+ */
+export const updateStudentStatus = (regNo, status, reason) => {
+  return apiClient.put(`/students/${regNo}/status`, { status, reason });
 };

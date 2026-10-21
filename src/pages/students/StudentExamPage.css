@@ -1,0 +1,94 @@
+.exam-page {
+  padding: 28px 32px;
+  color: var(--text-primary) !important;
+  background: var(--page-bg);
+  min-height: 100%;
+}
+
+/* HEADER */
+.student-header {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+
+.student-header h2 {
+  margin: 0;
+  color: var(--text-primary) !important;
+}
+
+/* TABLE */
+.exam-table-container {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.exam-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface-1);
+}
+
+.exam-table th,
+.exam-table td {
+  padding: 11px 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary) !important;
+}
+
+.exam-table th {
+  background: var(--ink-900) !important;
+  color: var(--text-on-accent) !important;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* SUBJECT COLUMN */
+.subject-cell {
+  text-align: left;
+  font-weight: 700;
+}
+
+/* HOVER */
+.exam-table tbody tr:nth-child(even) td {
+  background: var(--ink-50) !important;
+}
+
+.exam-table tbody tr:hover td {
+  background: var(--accent-50) !important;
+}
+
+.exam-absent {
+  color: var(--red-600) !important;
+  font-weight: 700;
+}
+
+.exam-page-empty,
+.exam-page-error {
+  padding: 20px;
+  color: var(--text-secondary);
+}
+
+.exam-page-error {
+  color: var(--red-600);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .exam-page {
+    padding: 16px;
+  }
+
+  .exam-table th,
+  .exam-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}

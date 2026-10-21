@@ -1,11 +1,27 @@
 import "./fees.css";
-import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import PayFee from "./PayFee";
 import CheckFee from "./CheckFee";
 import Defaulters from "./Defaulters";
+import { useLanguage } from "../../i18n/LanguageContext";
 
+// The tab shown here is driven by the URL (/fees/pay, /fees/check,
+// /fees/defaulters) rather than local component state. That was the bug:
+// with local state, this page always rendered "pay" no matter which URL
+// you landed on, so deep links like the dashboard's "Check fee status"
+// and "Defaulters" tiles opened this page but silently showed Pay Fee
+// instead. Reading the tab from the URL means every link, refresh, and
+// browser back/forward action lands on the right tab.
 export default function FeesDashboard() {
-  const [activeTab, setActiveTab] = useState("pay");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { t } = useLanguage();
+
+  const activeTab = location.pathname.endsWith("/check")
+    ? "check"
+    : location.pathname.endsWith("/defaulters")
+    ? "defaulters"
+    : "pay";
 
   const renderContent = () => {
     switch (activeTab) {
@@ -24,30 +40,30 @@ export default function FeesDashboard() {
     <div className="student-bg">
       <div className="fees-wrapper">
 
-        <h1 className="fees-title">Fee Management</h1>
-        <p className="fees-sub">Cash & UPI Collection</p>
+        <h1 className="fees-title">{t("fees.pageTitle")}</h1>
+        <p className="fees-sub">{t("fees.pageSubtitle")}</p>
 
         {/* Tabs */}
         <div className="fees-actions">
           <button
             className={activeTab === "pay" ? "active-tab" : ""}
-            onClick={() => setActiveTab("pay")}
+            onClick={() => navigate("/fees/pay")}
           >
-            💰 Pay Fee
+            💰 {t("fees.tabPay")}
           </button>
 
           <button
             className={activeTab === "check" ? "active-tab" : ""}
-            onClick={() => setActiveTab("check")}
+            onClick={() => navigate("/fees/check")}
           >
-            📄 Check Fee
+            📄 {t("fees.tabCheck")}
           </button>
 
           <button
             className={activeTab === "defaulters" ? "active-tab" : ""}
-            onClick={() => setActiveTab("defaulters")}
+            onClick={() => navigate("/fees/defaulters")}
           >
-            ⚠️ Defaulters
+            ⚠️ {t("fees.tabDefaulters")}
           </button>
         </div>
 

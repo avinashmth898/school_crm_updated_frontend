@@ -1,45 +1,43 @@
 import { NavLink } from "react-router-dom";
+import Icon from "../../ui/icons";
+import { isAdmin } from "../../auth/authStorage";
+
+const RAIL_ITEMS = [
+  { to: "/", label: "Dashboard", icon: Icon.Home, end: true },
+  { to: "/ednuvo", label: "EdNuvo", icon: Icon.Grid },
+  { to: "/students", label: "Students", icon: Icon.GraduationCap },
+  { to: "/teachers", label: "Teachers", icon: Icon.Teacher },
+  { to: "/fees", label: "Fees", icon: Icon.Wallet },
+  { to: "/command-centre", label: "Command centre", icon: Icon.Settings },
+  { to: "/reports", label: "Reports", icon: Icon.FileText },
+  { to: "/admin-panel", label: "Admin panel", icon: Icon.Lock, adminOnly: true },
+];
 
 const Sidebar = () => {
+  const admin = isAdmin();
   return (
-    <div style={sidebarStyle}>
-      <h3 style={{ marginBottom: "20px" }}>School CRM</h3>
-
-      <nav>
-        <NavItem to="/" label="Dashboard" />
-        <NavItem to="/students" label="Students" />
-        <NavItem to="/teachers" label="Teachers" />
-      </nav>
-    </div>
-  );
-};
-
-const NavItem = ({ to, label }) => {
-  return (
-    <NavLink
-      to={to}
-      end
-      style={({ isActive }) => ({
-        display: "block",
-        padding: "10px 12px",
-        marginBottom: "6px",
-        borderRadius: "6px",
-        textDecoration: "none",
-        color: isActive ? "#1e293b" : "#e5e7eb",
-        background: isActive ? "#e5e7eb" : "transparent",
-        fontWeight: isActive ? "600" : "400",
+    <nav className="rail">
+      {RAIL_ITEMS.filter(item => !item.adminOnly || admin).map(item => {
+        const IconComp = item.icon;
+        return (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            end={item.end}
+            title={item.label}
+            className={({ isActive }) => `rail-item ${isActive ? "active" : ""}`}
+          >
+            <span className="rail-icon"><IconComp size={19} /></span>
+            <span className="rail-label">{item.label}</span>
+          </NavLink>
+        );
       })}
-    >
-      {label}
-    </NavLink>
-  );
-};
 
-const sidebarStyle = {
-  width: "220px",
-  background: "#1e293b",
-  color: "#fff",
-  padding: "20px",
+      <div className="rail-brand" title="EdNuvo">
+        <img src="/logo.svg" alt="EdNuvo logo" width={20} height={20} />
+      </div>
+    </nav>
+  );
 };
 
 export default Sidebar;

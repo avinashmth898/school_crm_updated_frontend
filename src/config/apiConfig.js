@@ -6,13 +6,13 @@
  */
 
 /* Base URL of Spring Boot backend */
-export const API_BASE_URL = "http://localhost:8080";
+export const API_BASE_URL = "";
 
 /* Common API paths */
 export const API_PATHS = {
-  AUTH: "/api/auth",
-  USERS: "/api/users",
-  STUDENTS: "/api/students",
-  TEACHERS: "/api/teachers",
-  DASHBOARD: "/api/dashboard",
+  AUTH: "/auth",
+  USERS: "/users",
+  STUDENTS: "/students",
+  TEACHERS: "/teachers",
+  DASHBOARD: "/dashboard",
 };

@@ -1,0 +1,114 @@
+.exam-page {
+  padding: 28px 32px;
+  background: var(--page-bg);
+  color: var(--text-primary);
+  min-height: 100%;
+}
+
+/* TITLE */
+.exam-page h2 {
+  margin-bottom: 18px;
+  color: var(--text-primary);
+}
+
+/* TILE */
+.exam-tile {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: 0.15s;
+}
+
+/* HEADER */
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  cursor: pointer;
+  background: var(--ink-50);
+}
+
+.exam-header h3 {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.exam-header p {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ARROW */
+.arrow {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* CLASS LIST */
+.class-list {
+  padding: 10px 15px;
+}
+
+/* CLASS ITEM */
+.class-item {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.class-item:last-child {
+  border-bottom: none;
+}
+
+/* CLASS NAME */
+.class-name {
+  font-weight: 700;
+  color: var(--teal-600);
+}
+
+/* SUBJECTS */
+.subjects {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+  background: var(--red-50);
+  border: 1px solid var(--red-100);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--red-600);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.delete-btn:hover {
+  background: var(--red-100);
+}
+
+/* PASSWORD HINT */
+.password-hint {
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: var(--amber-600);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .exam-page {
+    padding: 16px;
+  }
+
+  .exam-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

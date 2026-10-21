@@ -3,6 +3,7 @@
  * --------------
  * Presentational component.
  */
+import EdNuvoLogo from "../../ui/EdNuvoLogo";
 
 const LoginPage = ({
   username,
@@ -14,7 +15,10 @@ const LoginPage = ({
 }) => {
   return (
     <div style={{ maxWidth: "400px", margin: "100px auto" }}>
-      <h2>School CRM Login</h2>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+        <EdNuvoLogo size={36} />
+        <h2 style={{ margin: 0 }}>EdNuvo Login</h2>
+      </div>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 

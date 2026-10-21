@@ -1,0 +1,499 @@
+/* ==================== PAGE WRAPPER ==================== */
+.admission-wrapper {
+  min-height: 100vh;
+  padding: 30px;
+  background: var(--page-bg, #eef2f8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==================== LOADING STATE ==================== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #000000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  margin-top: 16px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* ==================== ACTION BUTTONS ==================== */
+.top-actions {
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.btn-print,
+.btn-download {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
+}
+
+.btn-print {
+  background: var(--accent-600, #185FA5);
+  border-color: var(--accent-600, #185FA5);
+  color: #ffffff;
+}
+
+.btn-print:hover {
+  background: var(--accent-800, #0C447C);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-download {
+  background: #ffffff;
+  color: var(--accent-600, #185FA5);
+  border-color: var(--accent-600, #185FA5);
+}
+
+.btn-download:hover {
+  background: #f0f6fc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== ADMISSION DOCUMENT ==================== */
+.admission-document {
+  width: 100%;
+  max-width: 850px;
+  background: #ffffff;
+  padding: 60px 70px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  font-family: Arial, sans-serif;
+  color: #000000;
+  line-height: 1.6;
+}
+
+/* ==================== DOCUMENT HEADER ==================== */
+.document-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.school-name {
+  margin: 0 0 12px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #000000;
+}
+
+.address-line {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #000000;
+}
+
+.affiliation {
+  margin: 12px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.divider-line {
+  height: 2px;
+  background: #000000;
+  margin: 30px 0;
+}
+
+/* ==================== DOCUMENT TITLE ==================== */
+.document-title-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title-english {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: underline;
+  color: #000000;
+  letter-spacing: 0.5px;
+}
+
+.title-hindi {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: underline;
+  color: #000000;
+}
+
+/* ==================== DETAILS TABLE ==================== */
+.details-section {
+  margin-bottom: 40px;
+}
+
+.details-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #000000;
+}
+
+.details-table tr {
+  border-bottom: 1px solid #000000;
+}
+
+.details-table tr:last-child {
+  border-bottom: none;
+}
+
+.label-cell {
+  width: 35%;
+  padding: 12px 16px;
+  background: #ffffff;
+  border-right: 2px solid #000000;
+}
+
+.label-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.value-cell {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 500;
+}
+
+/* ==================== CONSENT SECTION ==================== */
+.consent-section {
+  margin-bottom: 40px;
+}
+
+.section-heading {
+  margin: 0 0 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  text-align: left;
+}
+
+.consent-text {
+  margin: 0 0 12px;
+  font-size: 13px;
+  text-align: justify;
+  line-height: 1.7;
+  color: #000000;
+}
+
+.consent-text-hindi {
+  margin: 0 0 20px;
+  font-size: 13px;
+  text-align: justify;
+  line-height: 1.7;
+  color: #000000;
+}
+
+/* ==================== CHECKLIST TABLE ==================== */
+.checklist-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #000000;
+  margin-bottom: 20px;
+}
+
+.checklist-table tr {
+  border-bottom: 1px solid #000000;
+}
+
+.checklist-table tr:last-child {
+  border-bottom: none;
+}
+
+.checkbox-cell {
+  width: 50px;
+  text-align: center;
+  padding: 10px;
+  border-right: 2px solid #000000;
+  background: #ffffff;
+}
+
+.checkbox-mark {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.checklist-text {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #000000;
+  line-height: 1.6;
+}
+
+.hindi-small {
+  font-size: 12px;
+  color: #000000;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ==================== DECLARATION ==================== */
+.declaration-text {
+  margin: 20px 0 12px;
+  font-size: 13px;
+  text-align: justify;
+  line-height: 1.7;
+  color: #000000;
+}
+
+.declaration-text-hindi {
+  margin: 12px 0 0;
+  font-size: 13px;
+  text-align: justify;
+  line-height: 1.7;
+  color: #000000;
+}
+
+/* ==================== SIGNATURE SECTION ==================== */
+.signature-section {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0 30px;
+  gap: 40px;
+}
+
+.signature-block {
+  flex: 1;
+}
+
+.seal-block {
+  text-align: center;
+}
+
+.seal-placeholder {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.signature-line {
+  width: 100%;
+  height: 1px;
+  background: #000000;
+  margin-bottom: 8px;
+}
+
+.signature-label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.signature-label-hindi {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #000000;
+}
+
+.date-line {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #000000;
+}
+
+.designation {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-style: italic;
+  color: #000000;
+}
+
+/* ==================== DOCUMENT FOOTER ==================== */
+.document-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.footer-divider {
+  height: 1px;
+  background: #000000;
+  margin-bottom: 16px;
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+  font-style: italic;
+  color: #000000;
+}
+
+.footer-text-hindi {
+  margin: 6px 0 0;
+  font-size: 12px;
+  text-align: center;
+  font-style: italic;
+  color: #000000;
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+  /* Hide action buttons */
+  .no-print,
+  .top-actions {
+    display: none !important;
+  }
+
+  /* Reset page styles for printing */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .admission-wrapper {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .admission-document {
+    max-width: 100%;
+    box-shadow: none;
+    border: none;
+    padding: 40px 50px;
+    margin: 0;
+  }
+
+  /* Ensure black and white printing */
+  * {
+    color: #000000 !important;
+    background: #ffffff !important;
+  }
+
+  .details-table,
+  .checklist-table,
+  .label-cell,
+  .checkbox-cell {
+    border-color: #000000 !important;
+  }
+
+  .divider-line,
+  .footer-divider,
+  .signature-line {
+    background: #000000 !important;
+  }
+
+  /* Page breaks */
+  .signature-section {
+    page-break-inside: avoid;
+  }
+
+  .consent-section {
+    page-break-inside: avoid;
+  }
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+  .admission-wrapper {
+    padding: 20px 10px;
+  }
+
+  .top-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-print,
+  .btn-download {
+    width: 100%;
+  }
+
+  .admission-document {
+    padding: 40px 30px;
+  }
+
+  .school-name {
+    font-size: 20px;
+  }
+
+  .address-line,
+  .affiliation {
+    font-size: 11px;
+  }
+
+  .title-english,
+  .title-hindi {
+    font-size: 18px;
+  }
+
+  .label-cell {
+    width: 40%;
+  }
+
+  .signature-section {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .signature-block {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .admission-document {
+    padding: 30px 20px;
+  }
+
+  .school-name {
+    font-size: 18px;
+  }
+
+  .title-english,
+  .title-hindi {
+    font-size: 16px;
+  }
+
+  .details-table,
+  .checklist-table {
+    font-size: 12px;
+  }
+
+  .label-cell,
+  .value-cell,
+  .checklist-text {
+    padding: 8px 10px;
+  }
+}

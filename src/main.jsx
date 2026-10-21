@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import "./theme.css";
 import App from "./app/App";
-import { login } from "./services/authService";
-
-login("test", "test")
-  .then((res) => console.log("Backend response:", res))
-  .catch((err) => console.error("Backend error:", err));
-
+import { LanguageProvider } from "./i18n/LanguageContext";
+import { ThemeProvider } from "./theme/ThemeContext";
+import { ToastProvider } from "./ui/ToastContext";
+import { ConfirmProvider } from "./ui/ConfirmContext";
 
 const root = document.getElementById("root");
 
@@ -17,8 +16,16 @@ if (!root) {
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ThemeProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <ConfirmProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ConfirmProvider>
+        </ToastProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

@@ -81,6 +81,7 @@ export default function TransportFeePage() {
                   <button
                     className="remove-btn"
                     onClick={() => handleDelete(route.transportFeeId)}
+                    aria-label={`Remove ${route.routeName} route`}
                   >
                     ✖
                   </button>

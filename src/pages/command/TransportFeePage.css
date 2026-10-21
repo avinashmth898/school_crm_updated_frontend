@@ -1,40 +1,72 @@
-/* Same styling as Annual Fee Page */
+/* Same styling as Annual/Session Fee Page */
 
 .fee-form {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
 }
 
 .fee-form input {
   flex: 1;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  color: white;
+  min-width: 180px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
   font-size: 14px;
 }
 
 .fee-form input::placeholder {
-  color: rgba(255,255,255,0.45);
+  color: var(--text-muted);
+}
+
+.fee-form input:focus {
+  outline: none;
+  border-color: var(--accent-400);
 }
 
 .add-btn {
-  background: linear-gradient(135deg,#00c6ff,#0072ff);
+  background: var(--accent-600);
   border: none;
-  padding: 12px 26px;
-  border-radius: 12px;
+  padding: 11px 22px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-weight: 600;
-  color: white;
+  font-weight: 700;
+  color: var(--text-on-accent);
+}
+
+.add-btn:hover {
+  background: var(--accent-800);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .fee-form {
+    flex-direction: column;
+  }
+
+  .fee-form input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
 }
 
 .remove-btn {
-  background: rgba(255, 77, 77, 0.12);
-  border: 1px solid rgba(255, 77, 77, 0.35);
+  background: var(--red-50);
+  border: 1px solid var(--red-100);
   padding: 6px 12px;
-  border-radius: 8px;
-  color: #ff6b6b;
+  border-radius: var(--radius-sm);
+  color: var(--red-600);
+  font-weight: 600;
   cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: var(--red-100);
 }

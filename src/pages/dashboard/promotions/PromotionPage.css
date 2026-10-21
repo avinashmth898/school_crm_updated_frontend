@@ -1,0 +1,230 @@
+.promotion-page {
+  padding: 28px 32px;
+  background: var(--page-bg);
+  color: var(--text-primary);
+  min-height: 100%;
+}
+
+/* HEADER */
+.promo-header h2 {
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.promo-header p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* DUES WARNING — shown after a promotion run if any promoted student still
+   has unpaid fees; amber/warning tint, consistent with the PARTIAL/DUE
+   tints used on the Pay Fee page. */
+.promo-due-warning {
+  background: var(--amber-50);
+  background: color-mix(in srgb, var(--amber-400) 14%, transparent);
+  border: 1px solid var(--amber-400);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.promo-due-warning-title {
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--text-primary);
+}
+
+.promo-due-warning-list {
+  margin: 0 0 8px;
+  padding-left: 20px;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.promo-due-warning-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ========================= */
+/* CLASS TILE GRID */
+/* ========================= */
+
+.class-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* TILE CARD */
+.class-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  cursor: pointer;
+  transition: 0.15s;
+  text-align: center;
+}
+
+.class-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-200);
+}
+
+/* ACTIVE TILE */
+.class-card.active {
+  background: var(--accent-600);
+  border-color: var(--accent-600);
+  color: white;
+  font-weight: 700;
+}
+
+/* TILE TEXT */
+.class-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.class-sub {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+/* ========================= */
+/* PANEL */
+/* ========================= */
+
+.student-panel {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+/* EMPTY STATE (PRO) */
+.empty-state-pro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+/* PANEL HEADER */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.panel-header h3 {
+  color: var(--text-primary);
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.select-all {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-primary);
+}
+
+/* PROMOTE BUTTON */
+.promote-btn {
+  background: var(--teal-600);
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.promote-btn:hover {
+  background: var(--teal-800);
+  transform: translateY(-1px);
+}
+
+/* ========================= */
+/* STUDENT TABLE */
+/* ========================= */
+
+.student-table {
+  margin-top: 15px;
+  border-top: 1px solid var(--border);
+}
+
+.student-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.student-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-name {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.student-right {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* The one-off confirmation modal that used to live here (with a hardcoded
+   plaintext password) was replaced by the shared ConfirmContext dialog +
+   a "type PROMOTE to confirm" prompt — same pattern as Backup & Restore's
+   "type IMPORT" step — so there's no bespoke modal markup/CSS to keep in
+   sync here anymore. */
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .promotion-page {
+    padding: 16px;
+  }
+
+  .class-tile-grid {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .student-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}

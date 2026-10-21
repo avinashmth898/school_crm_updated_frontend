@@ -1,0 +1,63 @@
+.attendance-container {
+  max-width: 900px;
+  margin: auto;
+  color: var(--text-primary);
+}
+
+.attendance-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text-primary);
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.attendance-table th {
+  padding: 11px;
+  background: var(--ink-900);
+  color: var(--text-on-accent);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.attendance-table td {
+  padding: 11px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.attendance-table tbody tr:nth-child(even) td {
+  background: var(--ink-50);
+}
+
+.attendance-table select {
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .attendance-container {
+    overflow-x: auto;
+  }
+
+  .attendance-table th,
+  .attendance-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
