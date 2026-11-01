@@ -144,11 +144,15 @@ export const Upload = (props) => (
   <svg {...base(props)}><path d="M12 20.5v-12M7 13l5-5 5 5" /><path d="M4.5 18v1.5a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5V18" /></svg>
 );
 
+export const LogOut = (props) => (
+  <svg {...base(props)}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><path d="M16 17l5-5-5-5" /><path d="M21 12H9" /></svg>
+);
+
 const Icon = {
   Home, Grid, GraduationCap, Teacher, Wallet, Settings, FileText, BarChart,
   CreditCard, FileEdit, AlertTriangle, Rocket, Building, Folder, Receipt,
   TrendingUp, BookOpen, Target, Award, Ticket, Key, User, Smartphone, Lock,
-  Search, Plus, ClipboardList, ArrowUp, Bell, Download, Upload,
+  Search, Plus, ClipboardList, ArrowUp, Bell, Download, Upload, LogOut,
 };
 
 export default Icon;

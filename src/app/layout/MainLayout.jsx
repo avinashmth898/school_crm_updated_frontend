@@ -2,9 +2,15 @@ import Sidebar from "./Sidebar";
 import TopBar from "./TopBar";
 import CommandPalette from "./CommandPalette";
 import { Outlet, useLocation } from "react-router-dom";
+import useIdleSessionRefresh from "../../auth/useIdleSessionRefresh";
 import "./sidebar.css";
 
 const MainLayout = () => {
+  // Keeps an actively-working user logged in by silently refreshing the
+  // token every couple of minutes; an idle user's 10-minute session just
+  // expires on schedule. See useIdleSessionRefresh.js.
+  useIdleSessionRefresh();
+
   const location = useLocation();
   // Key on the top-level section only (e.g. "fees", "students"), not the
   // full path — several pages (like Fees) read a sub-tab straight from

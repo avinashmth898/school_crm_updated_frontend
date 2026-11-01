@@ -50,6 +50,7 @@ import UsersPage from "../pages/command/access/UsersPage";
 import DevicesPage from "../pages/command/access/DevicesPage";
 import TeacherAccessPage from "../pages/command/access/TeacherAccessPage";
 import BackupPage from "../pages/command/backup/BackupPage";
+import ActivityLogPage from "../pages/command/activity/ActivityLogPage";
 
 import AdminPanelPage from "../pages/admin/AdminPanelPage";
 
@@ -112,6 +113,7 @@ const Router = () => {
         <Route path="admin-panel/teacher-access" element={<RequireAdmin><TeacherAccessPage /></RequireAdmin>} />
         <Route path="admin-panel/license" element={<RequireAdmin><LicenseStatusPage /></RequireAdmin>} />
         <Route path="admin-panel/backup" element={<RequireAdmin><BackupPage /></RequireAdmin>} />
+        <Route path="admin-panel/activity" element={<RequireAdmin><ActivityLogPage /></RequireAdmin>} />
 
         <Route path="/exam-structure" element={<ExamManagementPage />} />
         <Route path="command-centre/documents" element={<DocumentGenerator />} />

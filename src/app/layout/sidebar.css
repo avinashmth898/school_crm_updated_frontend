@@ -221,6 +221,11 @@
   color: var(--text-muted);
 }
 
+.topbar-user-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
 .topbar-user {
   width: 34px;
   height: 34px;
@@ -233,6 +238,60 @@
   font-weight: 700;
   font-size: 13px;
   flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.topbar-user-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 190px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 8px;
+  z-index: 50;
+}
+
+.topbar-user-menu-info {
+  padding: 6px 8px 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+
+.topbar-user-menu-name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.topbar-user-menu-role {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.topbar-user-menu-logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--danger, #dc2626);
+  cursor: pointer;
+}
+
+.topbar-user-menu-logout:hover {
+  background: var(--ink-50, rgba(220, 38, 38, 0.08));
 }
 
 /* ===== ICON RAIL ===== */

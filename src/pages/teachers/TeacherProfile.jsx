@@ -40,7 +40,7 @@ export default function TeacherProfile() {
 
       const now = new Date();
       const s = await apiClient.get(
-        `/api/teacher-attendance/summary/${id}?month=${now.getMonth()+1}&year=${now.getFullYear()}`
+        `/teacher-attendance/summary/${id}?month=${now.getMonth()+1}&year=${now.getFullYear()}`
       );
       setSummary(s.data);
 

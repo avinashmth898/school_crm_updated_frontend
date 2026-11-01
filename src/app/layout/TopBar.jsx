@@ -8,6 +8,7 @@ import ThemeSwitcher from "../../theme/ThemeSwitcher";
 import Icon from "../../ui/icons";
 import DESTINATIONS from "./destinations";
 import useDebouncedValue from "../../ui/useDebouncedValue";
+import { clearToken, getUsername, getRole } from "../../auth/authStorage";
 
 export default function TopBar() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ export default function TopBar() {
   const debouncedQuery = useDebouncedValue(query, 180);
   const [open, setOpen] = useState(false);
   const boxRef = useRef(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef(null);
 
   useEffect(() => {
     getSchoolInfo().then(res => setSchoolInfo(res.data)).catch(() => {});
@@ -27,10 +30,16 @@ export default function TopBar() {
   useEffect(() => {
     const onClickOutside = (e) => {
       if (boxRef.current && !boxRef.current.contains(e.target)) setOpen(false);
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) setUserMenuOpen(false);
     };
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
+
+  const handleLogout = () => {
+    clearToken();
+    navigate("/login", { replace: true });
+  };
 
   const results = useMemo(() => {
     const q = debouncedQuery.trim().toLowerCase();
@@ -130,7 +139,29 @@ export default function TopBar() {
       <ThemeSwitcher />
       <LanguageSwitcher />
 
-      <div className="topbar-user" title="Admin">A</div>
+      <div className="topbar-user-wrap" ref={userMenuRef}>
+        <button
+          type="button"
+          className="topbar-user"
+          title={getUsername() || "Account"}
+          onClick={() => setUserMenuOpen(o => !o)}
+        >
+          {(getUsername() || "A").charAt(0).toUpperCase()}
+        </button>
+
+        {userMenuOpen && (
+          <div className="topbar-user-menu">
+            <div className="topbar-user-menu-info">
+              <p className="topbar-user-menu-name">{getUsername() || "Account"}</p>
+              <p className="topbar-user-menu-role">{getRole() || ""}</p>
+            </div>
+            <button type="button" className="topbar-user-menu-logout" onClick={handleLogout}>
+              <Icon.LogOut size={15} />
+              Log out
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

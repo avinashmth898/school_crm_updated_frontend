@@ -50,6 +50,12 @@ const AdminPanelPage = () => {
           <p>One-click export/import of all school data</p>
         </div>
 
+        <div className="tile" {...tileProps(() => navigate("activity"))}>
+          <div className="icon"><Icon.ClipboardList size={22} /></div>
+          <h3>Activity Log</h3>
+          <p>Who did what, and when</p>
+        </div>
+
       </div>
 
       {/* 👇 THIS SHOWS THE CHILD ROUTE */}
